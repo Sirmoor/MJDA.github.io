@@ -1,0 +1,15 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "MJDA Activation Estimate"
+  page-navigation: false
+
+format:
+  html:
+    embed-resources: true
+    theme: none
+    page-layout: full
+    toc: false
+    title-block-banner: false
