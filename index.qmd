@@ -1,0 +1,1830 @@
+---
+title: "MECCA Joint Defence Agreement: Activation Estimate"
+subtitle: "Tabbed strategic model: system map, activation engine, case files, and India's ten-track response"
+format:
+  html:
+    embed-resources: true
+    theme: none
+    page-layout: full
+    toc: false
+    title-block-banner: false
+---
+
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-raised:#f5f5f5;
+    --bg-raised-2:#fafafa;
+    --border:#dcdcdc;
+    --border-soft:#ececec;
+    --text:#0a0a0a;
+    --text-dim:#333333;
+    --text-faint:#5c5c5c;
+    --teal:#0d8a72;
+    --teal-dim:#e1f5f0;
+    --amber:#9c6b1f;
+    --amber-dim:#f7ecd9;
+    --red:#b23a2d;
+    --red-dim:#fae2df;
+    --blue:#35638f;
+    --blue-dim:#e3ecf4;
+    --cell-text:#ffffff;
+    --ksa:#046a38;
+    --tur:#c81e2c;
+    --pak:#01411c;
+    --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+    --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
+  h3.subhead[id], .track[id], p[id]{scroll-margin-top:70px;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--serif);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .page{max-width:960px;margin:0 auto;padding:0 0 96px;}
+  .inner{max-width:960px;margin:0 auto;padding:0 28px;}
+
+  ::selection{background:var(--teal-dim);color:var(--text);}
+  a{color:var(--teal);}
+
+  /* ---------- flag bar ---------- */
+  .flagbar{height:6px;width:100%;background:linear-gradient(90deg, var(--ksa) 0 33.3%, var(--tur) 33.3% 66.6%, var(--pak) 66.6% 100%);}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:48px 28px 0;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+  .masthead .eyebrow{margin-bottom:18px;border-bottom:1px solid var(--border-soft);padding-bottom:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .flags{font-size:15px;letter-spacing:.1em;}
+  h1.title{
+    font-family:var(--sans);
+    font-weight:800;
+    font-size:clamp(34px,6vw,54px);
+    line-height:1.03;
+    letter-spacing:-.01em;
+    margin:0 0 4px;
+    text-wrap:balance;
+  }
+  h1.title .dim{color:var(--text-dim);font-weight:800;}
+  .dek{
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--text-dim);
+    font-size:18px;
+    max-width:66ch;
+    margin:18px 0 22px;
+  }
+  .factstrip{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);
+    border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:0;
+  }
+  .factstrip .cell{background:var(--bg-raised-2);padding:14px 16px;}
+  .factstrip .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:5px;}
+  .factstrip .v{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--text);}
+  @media (max-width:640px){ .factstrip{grid-template-columns:1fr 1fr;} }
+
+  /* ---------- tab nav ---------- */
+  nav.tabnav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);margin-top:28px;
+  }
+  nav.tabnav .inner{display:flex;gap:2px;overflow-x:auto;padding:0 28px;}
+  nav.tabnav button{
+    font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+    background:none;border:none;color:var(--text-faint);padding:16px 16px;cursor:pointer;white-space:nowrap;
+    border-bottom:3px solid transparent;transition:color .15s, border-color .15s;
+  }
+  nav.tabnav button:hover{color:var(--text);}
+  nav.tabnav button.active{color:var(--tab-accent, var(--teal));border-bottom-color:var(--tab-accent, var(--teal));font-weight:700;}
+  nav.tabnav button:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;}
+  nav.tabnav button[data-tab="overview"]{--tab-accent:#0d8a72;}
+  nav.tabnav button[data-tab="pre"]{--tab-accent:#9c6b1f;}
+  nav.tabnav button[data-tab="map"]{--tab-accent:#35638f;}
+  nav.tabnav button[data-tab="model"]{--tab-accent:#b23a2d;}
+  nav.tabnav button[data-tab="cases"]{--tab-accent:#6b4e9c;}
+  nav.tabnav button[data-tab="delhi"]{--tab-accent:#b8850f;}
+  nav.tabnav button[data-tab="response"]{--tab-accent:#1f7a3d;}
+  nav.tabnav button[data-tab="pact"]{--tab-accent:#7a5230;}
+  #tab-overview .part-label{color:#0d8a72;}
+  #tab-pre .part-label{color:#9c6b1f;}
+  #tab-map .part-label{color:#35638f;}
+  #tab-model .part-label{color:#b23a2d;}
+  #tab-cases .part-label{color:#6b4e9c;}
+  #tab-delhi .part-label{color:#b8850f;}
+  #tab-response .part-label{color:#1f7a3d;}
+  #tab-pact .part-label{color:#7a5230;}
+
+  .tabpage{padding:44px 28px 0;}
+
+  /* ---------- table of contents (overview tab) ---------- */
+  .toc{border:1px solid var(--border);border-radius:10px;background:var(--bg-raised-2);padding:20px 24px;margin-bottom:44px;}
+  .toc-label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px;}
+  .toc ol{list-style:none;margin:0;padding:0;counter-reset:toc;}
+  .toc li{counter-increment:toc;margin-bottom:2px;}
+  .toc button.toclink{
+    display:flex;width:100%;gap:12px;align-items:baseline;text-decoration:none;color:var(--text);
+    padding:9px 6px;border-radius:6px;background:none;border:none;font-family:inherit;font-size:inherit;text-align:left;cursor:pointer;
+  }
+  .toc button.toclink:hover, .toc button.toclink:focus-visible{background:var(--teal-dim);color:var(--teal);}
+  .toc button.toclink::before{
+    content:counter(toc,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--text-faint);flex:none;width:20px;
+  }
+  .toc button.toclink:hover::before, .toc button.toclink:focus-visible::before{color:var(--teal);}
+  .toc .toc-title{font-family:var(--sans);font-weight:700;font-size:15px;}
+  .toc .toc-dek{font-family:var(--sans);font-size:13px;color:var(--text-faint);margin-left:auto;text-align:right;padding-left:12px;}
+  @media (max-width:560px){ .toc .toc-dek{display:none;} }
+
+  /* ---------- section scaffolding ---------- */
+  .part-label{
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;
+  }
+  h2{font-family:var(--sans);font-weight:800;font-size:28px;letter-spacing:-.005em;margin:0 0 10px;text-wrap:balance;}
+  .section-index{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 32px;}
+  .section-index a{
+    font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--text-dim);text-decoration:none;
+    border:1px solid var(--border);background:var(--bg-raised-2);padding:6px 12px;border-radius:20px;
+    transition:border-color .15s, color .15s;
+  }
+  .section-index a:hover, .section-index a:focus-visible{border-color:var(--teal);color:var(--teal);}
+  .section-index a::before{content:"→ ";color:var(--text-faint);}
+  .section-index a:hover::before{color:var(--teal);}
+  h3.subhead{font-family:var(--sans);font-weight:800;font-size:16px;letter-spacing:.04em;text-transform:uppercase;color:var(--text-dim);margin:40px 0 16px;}
+  p{margin:0 0 16px;color:var(--text);font-size:16.5px;}
+  .lede{color:var(--text-dim);font-size:17px;}
+
+  blockquote.premise{
+    margin:0 0 20px;padding:6px 0 6px 22px;border-left:4px solid var(--teal);
+    font-style:italic;color:var(--text-dim);font-size:18px;
+  }
+
+  /* ---------- system map ---------- */
+  .map-card{background:var(--bg-raised-2);border:1px solid var(--border);border-radius:10px;padding:22px 22px 18px;}
+  .map-card svg{width:100%;height:auto;display:block;}
+  .legend{display:flex;flex-wrap:wrap;gap:16px 26px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border-soft);font-family:var(--mono);font-size:12.5px;color:var(--text-dim);}
+  .legend .swatch{display:inline-flex;align-items:center;gap:8px;}
+  .legend svg{width:26px;height:10px;flex:none;}
+
+  /* ---------- interactive network map ---------- */
+  .map-shell{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start;}
+  @media (max-width:820px){ .map-shell{grid-template-columns:1fr;} }
+  .map-panel{background:var(--bg-raised-2);border:1px solid var(--border);border-radius:12px;padding:12px;}
+  .map-panel svg{width:100%;height:auto;display:block;}
+  .mapnode{transition:filter .15s;}
+  .mapnode:hover circle{filter:brightness(0.95);}
+  .mapnode circle{transition:stroke-width .15s, stroke .15s;}
+  .mapnode.selected circle{stroke:var(--teal);stroke-width:3;}
+  .mapnode.selected text{fill:var(--teal);font-weight:700;}
+  .spoke{transition:opacity .15s;}
+  .side-panel{background:var(--bg-raised-2);border:1px solid var(--border);border-radius:12px;padding:22px;min-height:360px;}
+  .side-panel h3{font-family:var(--sans);font-weight:800;font-size:21px;margin:0 0 4px;}
+  .side-panel .role{font-family:var(--mono);font-size:11px;color:var(--text-faint);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;}
+  .rel-row{border-top:1px solid var(--border-soft);padding:13px 0;}
+  .rel-row:first-of-type{border-top:none;}
+  .rel-row .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;gap:8px;}
+  .rel-row .who{font-weight:700;font-size:14.5px;font-family:var(--sans);}
+  .rel-tag{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:20px;border:1px solid currentColor;white-space:nowrap;}
+  .rel-row p{margin:0;font-size:13.5px;color:var(--text-dim);line-height:1.55;}
+  .side-panel .placeholder{color:var(--text-faint);font-size:14.5px;line-height:1.7;}
+  .side-panel .placeholder .big{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--text-dim);display:block;margin-bottom:12px;}
+
+  /* ---------- Indian concern ---------- */
+  .indian-concern{border-radius:9px;padding:16px 18px;margin-top:14px;border:1px solid var(--border);}
+  .indian-concern .ic-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:8px;}
+  .indian-concern .ic-level{font-family:var(--sans);font-weight:800;font-size:17px;margin-bottom:6px;}
+  .indian-concern .ic-note{font-size:14px;color:var(--text-dim);line-height:1.6;}
+  .indian-concern.low{background:var(--teal-dim);border-color:var(--teal);} .indian-concern.low .ic-level{color:var(--teal);}
+  .indian-concern.medium{background:var(--amber-dim);border-color:var(--amber);} .indian-concern.medium .ic-level{color:var(--amber);}
+  .indian-concern.high{background:var(--red-dim);border-color:var(--red);} .indian-concern.high .ic-level{color:var(--red);}
+
+  /* ---------- tables ---------- */
+  .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-family:var(--sans);font-size:14.5px;}
+  thead th{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint);
+    text-align:left;font-weight:600;background:var(--bg-raised-2);padding:12px 16px;border-bottom:1px solid var(--border);white-space:nowrap;
+  }
+  tbody td{padding:11px 16px;border-bottom:1px solid var(--border-soft);color:var(--text-dim);}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody th{padding:11px 16px;border-bottom:1px solid var(--border-soft);text-align:left;font-weight:600;color:var(--text);border-left:3px solid transparent;}
+  tbody tr:hover td, tbody tr:hover th{background:rgba(0,0,0,.015);}
+  td.center, th.center{text-align:center;font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:700;}
+  .g{color:var(--teal);} .o{color:var(--amber);} .r{color:var(--red);}
+  .matrix-flag th{border-left-color:var(--teal);}
+  caption.tbl-note{caption-side:bottom;text-align:left;font-family:var(--mono);font-size:12.5px;color:var(--text-dim);padding:12px 16px 14px;line-height:1.6;}
+
+  .ladder-table td{color:var(--text);font-size:16px;}
+  .rung{font-family:var(--mono);font-weight:700;color:var(--teal);width:44px;}
+
+  /* ---------- alignment notes ---------- */
+  .align-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:18px;}
+  .align-note{border:1px solid var(--border);border-radius:10px;padding:16px 18px;background:var(--bg-raised-2);}
+  .align-note .who{font-family:var(--sans);font-weight:800;font-size:14.5px;margin-bottom:8px;}
+  .align-note .row{display:flex;gap:8px;align-items:baseline;font-size:14px;color:var(--text-dim);margin-bottom:4px;}
+  .align-note .row b{font-family:var(--mono);width:38px;flex:none;}
+  .align-note .note{font-size:13.5px;color:var(--text-dim);margin-top:8px;padding-top:8px;border-top:1px dashed var(--border-soft);}
+  .correction-tag{
+    display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--teal);background:var(--teal-dim);padding:2px 7px;border-radius:4px;margin-left:6px;
+  }
+
+  /* ---------- finding callout ---------- */
+  .finding{border:1px solid var(--border);border-top:3px solid var(--teal);background:var(--bg-raised-2);border-radius:10px;padding:24px 26px;margin:24px 0;}
+  .finding .thesis{font-family:var(--sans);font-weight:800;font-size:19px;margin:0 0 12px;color:var(--text);}
+  .finding p{color:var(--text-dim);margin-bottom:14px;}
+  .finding p:last-child{margin-bottom:0;}
+  .costs{margin:0;padding-left:20px;}
+  .costs li{margin-bottom:14px;color:var(--text-dim);font-size:16px;}
+  .costs li b{color:var(--text);}
+
+  /* ---------- standing layer ---------- */
+  .flow-row{display:flex;gap:16px;padding:14px 0;border-top:1px solid var(--border-soft);align-items:flex-start;flex-wrap:wrap;}
+  .flow-row:first-child{border-top:none;}
+  .flow-path{font-family:var(--mono);font-size:12.5px;color:var(--teal);min-width:150px;font-weight:600;}
+  .flow-path .tier{display:block;color:var(--text-faint);font-weight:400;margin-top:3px;}
+  .flow-path.outside{color:var(--text-faint);}
+  .flow-note{flex:1;min-width:220px;font-size:14.5px;color:var(--text-dim);}
+  .flow-note .oob{font-family:var(--mono);font-size:11px;color:var(--text-faint);margin-left:6px;}
+  .flow-note .unverified{font-family:var(--mono);font-size:10.5px;color:var(--red);border:1px dashed var(--red);padding:1px 6px;border-radius:4px;margin-left:6px;}
+
+  /* ---------- engine ---------- */
+  .engine-box{background:var(--bg-raised-2);border:1px solid var(--border);border-radius:12px;padding:24px 26px;margin-bottom:20px;}
+  .engine-grid{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:16px;}
+  .field{flex:1 1 170px;}
+  .field label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);margin-bottom:6px;}
+  .field select{
+    width:100%;padding:11px 12px;background:var(--bg-raised);color:var(--text);border:1px solid var(--border);border-radius:7px;
+    font-family:var(--sans);font-size:15px;font-weight:600;appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235c5c5c'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 12px center;
+  }
+  .field select:focus{outline:2px solid var(--teal);outline-offset:1px;}
+  .conflict-note{border-top:1px solid var(--border-soft);padding-top:14px;font-size:14.5px;color:var(--text-dim);}
+  .conflict-note .trig{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:6px;}
+  .conflict-note .trig b{font-weight:700;}
+
+  .result-card{border-radius:10px;border:1px solid var(--border);background:var(--bg-raised-2);padding:20px 22px;margin-bottom:14px;border-left:3px solid var(--teal);}
+  .result-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+  .result-head .rname{font-family:var(--sans);font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:.02em;}
+  .result-head .rpeak{font-family:var(--mono);font-size:12px;color:var(--text-dim);text-transform:uppercase;}
+  .ladder2{display:flex;gap:3px;margin-bottom:6px;}
+  .ladder2 span{
+    flex:1;height:26px;display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:11px;font-weight:700;border-radius:3px;background:var(--border-soft);color:var(--text-faint);
+  }
+  .rung-desc{font-family:var(--mono);font-size:12.5px;color:var(--text-dim);margin-bottom:14px;}
+  .db-group{border-top:1px dashed var(--border-soft);padding-top:10px;margin-top:10px;}
+  .db-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;}
+  .db-row{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:3px 0;color:var(--text-dim);}
+  .db-row b{font-family:var(--mono);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .db-why{font-family:var(--mono);font-size:12px;color:var(--text-dim);padding-left:2px;margin-bottom:4px;}
+  .db-tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--blue);margin-left:6px;}
+  .net-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;font-weight:700;border-top:1px solid var(--border-soft);margin-top:10px;padding-top:10px;}
+  .flag-row{font-family:var(--mono);font-size:12px;margin-top:10px;line-height:1.7;padding:10px 12px;border-radius:6px;}
+  .flag-row.gap{background:var(--red-dim);color:var(--red);}
+  .flag-row.floor{background:var(--teal-dim);color:var(--teal);}
+
+  .counter-box{border-left:3px solid var(--blue);}
+  .counter-block{border-top:1px solid var(--border-soft);padding:11px 0;}
+  .counter-block:first-child{border-top:none;}
+  .counter-block .against{font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em;}
+  .counter-block ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--text-dim);}
+  .counter-block li{margin-bottom:5px;}
+  .counter-strategic{border-top:1px solid var(--border-soft);padding-top:11px;margin-top:2px;font-size:14.5px;color:var(--text);}
+
+  .treaty-toggle{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:6px;}
+  .treaty-toggle b{color:var(--amber);}
+  input[type="range"]{width:100%;accent-color:var(--amber);margin-bottom:6px;}
+  .engine-hint{font-family:var(--mono);font-size:13px;color:var(--text-dim);line-height:1.6;}
+
+  /* ---------- nuclear overlay ---------- */
+  .nuke-toggle{cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);user-select:none;}
+  .nuke-toggle:hover{color:var(--amber);}
+  .nuke-card{padding:16px 18px;margin-top:12px;border-radius:8px;}
+  .nuke-card.solid{background:var(--bg-raised);border:1px solid var(--border);}
+  .nuke-card.dashed{border:1px dashed var(--text-faint);opacity:.9;}
+  .nuke-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:8px;}
+  .nuke-flow{font-family:var(--sans);font-weight:800;font-size:17px;letter-spacing:.02em;}
+  .nuke-type{font-family:var(--mono);font-size:11.5px;color:var(--text-dim);}
+  .nuke-status{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:2px 8px;border-radius:4px;}
+  .nuke-status.circumstantial{color:var(--amber);border:1px solid var(--amber-dim);background:var(--amber-dim);}
+  .nuke-status.inferred{color:var(--amber);border:1px solid var(--amber-dim);background:var(--amber-dim);}
+  .nuke-status.hypothesis{color:var(--red);border:1px dashed var(--red);background:transparent;}
+  .nuke-warn{font-family:var(--mono);font-size:11.5px;color:var(--red);margin-bottom:8px;line-height:1.6;}
+  .nuke-card p{font-size:14px;line-height:1.6;margin:0 0 7px;color:var(--text-dim);}
+  .nuke-card p:last-child{margin-bottom:0;}
+  .nuke-card .against{font-family:var(--mono);font-size:11px;color:var(--text-dim);}
+  .nuke-likelihood{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:12px;border-top:1px dashed var(--border-soft);margin-top:9px;padding-top:8px;}
+  .nuke-likelihood b{color:var(--teal);}
+  .nuke-bridge{margin-top:14px;padding:12px 15px;border-radius:7px;background:var(--red-dim);color:var(--red);font-family:var(--mono);font-size:12px;line-height:1.7;display:none;}
+
+  /* ---------- mode toggle ---------- */
+  .mode-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:16px;}
+  .mode-toggle button{flex:1;padding:11px 14px;background:var(--bg-raised);color:var(--text-faint);border:none;font-family:var(--sans);font-size:13.5px;font-weight:700;cursor:pointer;letter-spacing:.01em;}
+  .mode-toggle button + button{border-left:1px solid var(--border);}
+  .mode-toggle button.active{background:var(--teal-dim);color:var(--teal);}
+  .mode-toggle button:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;}
+  .posture-note{font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-bottom:14px;line-height:1.7;}
+
+  /* ---------- mechanisms ---------- */
+  .mech{border:1px solid var(--border);border-radius:10px;background:var(--bg-raised-2);padding:24px 26px;margin-bottom:16px;}
+  .mech-num{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--teal);text-transform:uppercase;}
+  .mech h3{font-family:var(--sans);font-weight:800;font-size:19px;margin:6px 0 10px;}
+  .mech p{font-size:16px;}
+  .mech .active-in{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border-soft);font-family:var(--mono);font-size:12.5px;color:var(--text-dim);line-height:1.6;}
+  .mech .active-in b{color:var(--text);}
+
+  /* ---------- indicators ---------- */
+  .indicators{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+  .ind-card{border:1px solid var(--border);border-radius:10px;background:var(--bg-raised-2);padding:18px 20px;}
+  .ind-card .chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:5px;margin-bottom:12px;}
+  .ind-card.early .chip{color:var(--teal);background:var(--teal-dim);}
+  .ind-card.concern .chip{color:var(--amber);background:var(--amber-dim);}
+  .ind-card.escalation .chip{color:var(--red);background:var(--red-dim);}
+  .ind-card ul{margin:0;padding-left:18px;font-size:14.5px;color:var(--text-dim);}
+  .ind-card li{margin-bottom:10px;}
+  .ind-card li:last-child{margin-bottom:0;}
+
+  /* ---------- case files ---------- */
+  .case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media (max-width:760px){ .case-grid{grid-template-columns:1fr;} }
+  .case-card{border:1px solid var(--border);border-radius:12px;background:var(--bg-raised-2);padding:20px 22px;transition:border-color .15s, transform .15s;}
+  .case-card:hover{border-color:var(--teal);}
+  .case-card .num{font-family:var(--mono);font-size:11px;color:var(--teal);letter-spacing:.14em;margin-bottom:8px;}
+  .case-card h4{font-family:var(--sans);font-weight:800;font-size:18px;margin:0 0 8px;}
+  .case-card p{font-size:14.5px;color:var(--text-dim);margin:0 0 14px;}
+  .case-card .runbtn{
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);
+    background:var(--teal-dim);border:none;border-radius:6px;padding:9px 14px;cursor:pointer;font-weight:700;
+  }
+  .case-card .runbtn:hover{background:var(--teal);color:#fff;}
+
+  /* ---------- reading the pact / doctrine ---------- */
+  .doctrine-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  @media (max-width:760px){ .doctrine-grid{grid-template-columns:1fr;} }
+  .doctrine-card{border:1px solid var(--border);border-radius:12px;background:var(--bg-raised-2);padding:22px 24px;}
+  .doctrine-card .n{font-family:var(--mono);color:var(--teal);font-size:11.5px;letter-spacing:.14em;margin-bottom:10px;}
+  .doctrine-card h4{font-family:var(--sans);font-weight:800;font-size:18px;margin:0 0 10px;text-wrap:balance;}
+  .doctrine-card p{font-size:15px;color:var(--text-dim);margin:0;}
+
+  .debate-box{border:1px dashed var(--blue);border-radius:10px;background:var(--blue-dim);padding:20px 22px;margin:24px 0;}
+  .debate-box .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+  .debate-box p{color:var(--text-dim);margin-bottom:10px;font-size:15px;}
+  .debate-box p:last-child{margin-bottom:0;}
+
+  /* ---------- response tracks ---------- */
+  .track{border:1px solid var(--border);border-radius:10px;background:var(--bg-raised-2);padding:24px 26px;margin-bottom:16px;}
+  .track-num{font-family:var(--mono);font-size:23px;font-weight:700;color:var(--teal);float:left;line-height:1;margin-right:16px;}
+  .track h3{font-family:var(--sans);font-weight:800;font-size:19px;margin:0 0 4px;}
+  .track .track-dek{font-family:var(--sans);font-size:13.5px;color:var(--text-dim);margin-bottom:14px;line-height:1.6;}
+  .track-body{overflow:hidden;}
+  .track-body p{font-size:15.5px;color:var(--text-dim);margin-bottom:12px;}
+  .track-body p:last-child{margin-bottom:0;}
+  .track-body ul{margin:0 0 12px;padding-left:20px;}
+  .track-body li{font-size:15.5px;color:var(--text-dim);margin-bottom:8px;}
+  .track-body li:last-child{margin-bottom:0;}
+  .track-body b{color:var(--text);}
+  .lever-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--amber);border:1px solid var(--amber-dim);background:var(--amber-dim);padding:3px 9px;border-radius:5px;margin:0 6px 6px 0;}
+
+  .india-box{margin-top:18px;padding:14px 18px;border-left:3px solid var(--teal);background:rgba(13,138,114,.05);border-radius:0 8px 8px 0;}
+  .india-box .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);}
+  .india-box .posture{font-family:var(--sans);font-weight:700;color:var(--teal);font-size:14.5px;margin:3px 0 8px;}
+  .india-box p{margin:0;font-size:15px;color:var(--text-dim);}
+
+  .footnote{margin-top:40px;padding-top:20px;border-top:1px solid var(--border-soft);font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--text-dim);}
+
+  footer.pagefoot{padding:56px 28px 0;font-family:var(--mono);font-size:12px;color:var(--text-faint);}
+
+  @media (max-width:640px){
+    .masthead, .tabpage{padding-left:18px;padding-right:18px;}
+    nav.tabnav .inner{padding:0 18px;}
+    thead th, tbody td, tbody th{padding:9px 10px;font-size:13px;}
+  }
+</style>
+
+<div class="flagbar"></div>
+<div class="page">
+
+  <div class="masthead">
+    <div class="eyebrow">
+      <span>Alliance Activation Estimate / Strategic Analysis Report</span>
+      <span class="flags">🇸🇦 🇹🇷 🇵🇰</span>
+    </div>
+    <h1 class="title">MECCA JOINT DEFENCE<br><span class="dim">AGREEMENT</span></h1>
+    <p class="dek">Three signatories. Three separate enemies. A model of who actually turns up, what the wider network of obligations does to that answer, and what it means for the one large power watching from outside the triangle.</p>
+    <p style="font-family:var(--mono);font-size:11.5px;color:var(--text-faint);letter-spacing:.02em;margin:0 0 18px;">Prepared with AI assistance. Read the Reading the Pact tab for what is verified fact versus modelled judgement.</p>
+    <div class="factstrip">
+      <div class="cell"><div class="k">Signed</div><div class="v">🇸🇦 🇹🇷 🇵🇰 · 07 Aug 2026, Mecca</div></div>
+      <div class="cell"><div class="k">Members</div><div class="v">KSA · TUR · PAK</div></div>
+      <div class="cell"><div class="k">Backdrop</div><div class="v">Iran-Saudi exchanges, live since Feb 2026</div></div>
+      <div class="cell"><div class="k">Builds on</div><div class="v">Sept 2025 Saudi-Pakistan pact</div></div>
+    </div>
+  </div>
+
+  <nav class="tabnav">
+    <div class="inner" id="tabButtons"></div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- TAB: OVERVIEW -->
+  <!-- ============================================================ -->
+  <section class="tabpage" id="tab-overview">
+    <nav class="toc">
+      <div class="toc-label">On this page</div>
+      <ol>
+        <li><button class="toclink" data-goto="pre"><span class="toc-title">Preconflict Situation Monitoring</span><span class="toc-dek">The three flows to track continuously</span></button></li>
+        <li><button class="toclink" data-goto="map"><span class="toc-title">System Map</span><span class="toc-dek">Who owes what to whom, and the asymmetry finding</span></button></li>
+        <li><button class="toclink" data-goto="model"><span class="toc-title">Activation Model</span><span class="toc-dek">What's flowing now, the live calculator, and why the network decides</span></button></li>
+        <li><button class="toclink" data-goto="cases"><span class="toc-title">Case Files</span><span class="toc-dek">Eight pre-built scenarios, one click to load</span></button></li>
+        <li><button class="toclink" data-goto="delhi"><span class="toc-title">The View from Delhi</span><span class="toc-dek">Where India sits, and what to watch</span></button></li>
+        <li><button class="toclink" data-goto="response"><span class="toc-title">India's Strategic Response</span><span class="toc-dek">Ten tracks</span></button></li>
+        <li><button class="toclink" data-goto="pact"><span class="toc-title">Reading the Pact</span><span class="toc-dek">What to hold in mind, and where analysts disagree</span></button></li>
+      </ol>
+    </nav>
+
+    <div class="part-label">Premise</div>
+    <h2>The disjoint threat problem</h2>
+    <blockquote class="premise">Collective defence holds when the threat is shared. Riyadh insures against Iran. Ankara insures against Israel. Islamabad insures against India. Each member is buying cover from two partners who hold working relations with the adversary in question.</blockquote>
+    <p>The treaty carries the Article 5 sentence: an armed attack on one is an attack on all. It arrives without an integrated command, a standing force commitment, or an automatic trigger. Riyadh's own spokesman placed the pact outside the category of a military axis within hours of signature. The precedents point the same way. The Gulf Cooperation Council mutual defence provision of 2000 and the Saudi-Pakistan Strategic Mutual Defence Agreement of September 2025 have both existed without producing Article 5 behaviour.</p>
+    <p>What follows treats the pact as a set of steps a partner can climb, not an on/off switch. The question in each scenario is which step a partner actually reaches, and which of its other relationships stops it going higher.</p>
+    <p style="font-style:italic;color:var(--text-dim);">Another view to be considered: several regional analysts treat this less as an anti-India pact and more as an anti-Israel one. They see it as a response to fading trust that the United States still provides adequate cover. See Reading the Pact for that case laid out in full.</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TAB: PRECONFLICT SITUATION MONITORING -->
+  <!-- ============================================================ -->
+  <section class="tabpage" id="tab-pre" style="display:none;">
+    <div class="part-label">Preconflict</div>
+    <h2>Preconflict situation monitoring</h2>
+    <nav class="section-index">
+      <a href="#sec-watch">Three flows to watch</a>
+      <a href="#sec-standing">Full standing layer</a>
+      <a href="#sec-nuclear">Nuclear overlay</a>
+    </nav>
+    <p class="lede">This is the baseline, not a crisis signal. Three flows run continuously, whether or not any of the case files ever trigger, and they matter more to the balance than most single scenarios do. Track these routinely, not just when something happens.</p>
+
+    <h3 class="subhead" id="sec-watch" style="margin-top:8px;">Three flows to watch</h3>
+    <div class="doctrine-grid">
+      <div class="doctrine-card" style="border-left:3px solid var(--teal);">
+        <div class="n">Watch 01 &middot; Money, steady state</div>
+        <h4>Saudi funds into Pakistan</h4>
+        <p><b>Watch for:</b> central bank deposit renewals, deferred-oil-facility extensions, new investment pledges, IMF-adjacent bridge financing.<br><br><b>Why it matters:</b> roughly eight billion dollars a year against a Pakistani fiscal deficit near 3.3 trillion rupees. The single largest lever keeping Islamabad solvent, and the flow with the clearest Indian counter, the customer brake, already available.</p>
+      </div>
+      <div class="doctrine-card" style="border-left:3px solid var(--amber);">
+        <div class="n">Watch 02 &middot; Materiel, steady state</div>
+        <h4>Turkish weapons and cooperation into Pakistan</h4>
+        <p><b>Watch for:</b> Bayraktar and Akıncı family deliveries, loitering munitions, naval and submarine upgrade milestones, joint air-force training cycles, technician deployments.<br><br><b>Why it matters:</b> a second resupply channel running through a NATO member, and the one flow where India has direct procurement-exclusion leverage rather than an indirect one.</p>
+      </div>
+      <div class="doctrine-card" style="border-left:3px solid var(--red);">
+        <div class="n">Watch 03 &middot; Boots on the ground, live since May 2026</div>
+        <h4>Pakistani force deployment into Saudi Arabia</h4>
+        <p><b>Watch for:</b> squadron rotations, air-defence detachment strength, training-cadre size, and any movement of these assets back toward the India-facing western front.<br><br><b>Why it matters:</b> the one flow that has already crossed into actual deployment, and the clearest tripwire in this entire model. A recall of these forces mid-crisis is the single indicator that links the Gulf theatre to the India theatre directly.</p>
+      </div>
+    </div>
+
+    <h3 class="subhead" id="sec-standing">The full standing layer</h3>
+    <div class="engine-box" style="border-left:3px solid var(--teal);">
+      <p style="font-size:15px;color:var(--text-dim);margin:0 0 4px;">All five flows the three watch items above sit inside, including the two that predate the pact and are not aimed at India at all.</p>
+      <div id="standingFlows"></div>
+    </div>
+
+    <h3 class="subhead" id="sec-nuclear">Overlay: nuclear flows</h3>
+    <div class="engine-box" style="border-left:3px solid var(--amber);">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;">
+        <h3 style="font-family:var(--sans);font-weight:800;font-size:19px;margin:0 0 4px;">Three flows, one currency each</h3>
+        <span class="nuke-toggle" id="nukeToggle">hide</span>
+      </div>
+      <p style="font-size:14.5px;color:var(--text-dim);margin:0 0 4px;">Kept separate from the T0 to T5 ladder on the Activation Model tab deliberately. Those tiers are calibrated against a real anchor, the May 2026 Saudi deployment. Nuclear transfer has no equivalent data point, so pricing it into the same numeric scale would fake a precision the evidence cannot support. This belongs here rather than in the crisis calculator because, like the rest of the standing layer, it runs continuously and does not wait for an attack.</p>
+      <p class="engine-hint" style="margin:10px 0 14px;">How to read the percentages below, and everywhere else in this report: under 5 pc means remote, 5 to 20 pc means unlikely, 40 to 60 pc means roughly a coin flip, 60 to 80 pc means likely, above 90 pc means almost certain.</p>
+      <p class="engine-hint" style="margin:0 0 14px;">One point to note alongside the Pakistan-Turkey card below: Turkey has separately disclosed a ballistic missile with a reported 6,000 kilometre range. That range says nothing about a warhead source, so it does not move the assessed likelihood on its own, but it raises the stakes of the underlying motive question and deserves watching for what it gets paired with next.</p>
+      <div id="nukeCards"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TAB: SYSTEM MAP -->
+  <!-- ============================================================ -->
+  <section class="tabpage" id="tab-map" style="display:none;">
+    <div class="part-label">Part One</div>
+    <h2>System map</h2>
+    <nav class="section-index">
+      <a href="#sec-relmap">Relationship map</a>
+      <a href="#sec-matrix">Alignment matrix</a>
+      <a href="#sec-asymmetry">Asymmetry finding</a>
+      <a href="#sec-costs">What this costs India</a>
+    </nav>
+    <p class="lede" id="sec-relmap">Click any outer node to open its relationship profile against Saudi Arabia, Türkiye and Pakistan individually. The three signatories sit in the centre triangle with a coloured ring; every spoke out to an outer state is coloured by that state's relationship to the signatory it points at.</p>
+    <div class="map-shell">
+      <div class="map-panel">
+        <div id="netmapContainer"></div>
+      </div>
+      <div class="side-panel" id="mapSidePanel">
+        <div class="placeholder">
+          <span class="big">Select a state.</span>
+          Click any outer node, the United States, China, India, Iran, Israel, Russia, Qatar, the UAE, Egypt, Azerbaijan, Greece &amp; Cyprus, Armenia, Ansar Allah, Taliban Afghanistan or Somalia, to see how it actually relates to each of the three signatories. That surrounding web, not the treaty text, is what decides how far Riyadh, Ankara and Islamabad are each willing to go for one another.
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:22px;">Every threat vector into the triangle terminates at a state that at least one other signatory needs to keep on side. Riyadh holds India as a customer and Israel as an unfinished normalisation file. Ankara holds Iran as a trading partner whose collapse would push Kurds and refugees across its border. Washington sits above all three as the underwriter that Saudi Arabia and Turkey both draw on.</p>
+    <p>Pakistan carries the one relationship the diagram cannot show cleanly on spoke colour alone. It shares a 900 kilometre border with Iran, an active Baloch insurgency along it, and a Shia population in the tens of millions. That tie caps Pakistani participation in any Gulf campaign at the defensive line, whatever the treaty text says.</p>
+
+    <h3 class="subhead" id="sec-matrix">Alignment matrix</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>External actor</th><th class="center">KSA</th><th class="center">PAK</th><th class="center">TUR</th></tr></thead>
+        <tbody>
+          <tr class="matrix-flag"><th>India</th><td class="center g">G</td><td class="center r">R</td><td class="center o">O</td></tr>
+          <tr class="matrix-flag"><th>Iran</th><td class="center r">R</td><td class="center o">O</td><td class="center o">O</td></tr>
+          <tr class="matrix-flag"><th>Israel</th><td class="center o">O</td><td class="center r">R</td><td class="center r">R</td></tr>
+          <tr><th>United States</th><td class="center g">G</td><td class="center g">G</td><td class="center o">O</td></tr>
+          <tr><th>China</th><td class="center g">G</td><td class="center g">G</td><td class="center o">O</td></tr>
+          <tr><th>Russia</th><td class="center g">G</td><td class="center o">O</td><td class="center o">O</td></tr>
+          <tr><th>Qatar</th><td class="center g">G</td><td class="center g">G</td><td class="center g">G</td></tr>
+          <tr><th>UAE</th><td class="center r">R</td><td class="center r">R</td><td class="center o">O</td></tr>
+          <tr><th>Egypt</th><td class="center g">G</td><td class="center g">G</td><td class="center o">O</td></tr>
+          <tr><th>Azerbaijan</th><td class="center g">G</td><td class="center g">G</td><td class="center g">G</td></tr>
+          <tr><th>Greece &amp; Cyprus</th><td class="center o">O</td><td class="center o">O</td><td class="center r">R</td></tr>
+          <tr><th>Armenia</th><td class="center o">O</td><td class="center r">R</td><td class="center r">R</td></tr>
+          <tr><th>Ansar Allah</th><td class="center r">R</td><td class="center o">O</td><td class="center o">O</td></tr>
+          <tr><th>Taliban Afghanistan</th><td class="center o">O</td><td class="center r">R</td><td class="center o">O</td></tr>
+          <tr><th>Somalia</th><td class="center g">G</td><td class="center g">G</td><td class="center g">G</td></tr>
+        </tbody>
+        <caption class="tbl-note"><span class="g">G</span> allied &middot; <span class="o">O</span> neutral or managed &middot; <span class="r">R</span> adversarial. The three flagged rows are the pact's operative threats. Not one of them is red across all three columns. That single fact governs everything below.</caption>
+      </table>
+    </div>
+
+    <div class="align-notes">
+      <div class="align-note">
+        <div class="who">India <span class="correction-tag">corrected</span></div>
+        <div class="row"><b>TUR</b> R to O</div>
+        <div class="note">Turkey's actions in past India-Pakistan crises, including personnel reportedly manning systems for Pakistan in an active conflict, argue for R. But the same relationship is transactional and power-projection driven rather than born of inherent hostility, and tourism and trade ties are real. This report records the correction to O as instructed, while flagging that Takshashila's own analysts split on this exact call: read it as managed friction, not settled peace.</div>
+      </div>
+      <div class="align-note">
+        <div class="who">United States <span class="correction-tag">corrected</span></div>
+        <div class="row"><b>PAK</b> O to G</div>
+        <div class="note">IMF board weight, a durable counter-terrorism channel, and F-16 sustainment give Washington real, if fluctuating, leverage over Islamabad. G here reflects functioning alignment, not warmth.</div>
+      </div>
+      <div class="align-note">
+        <div class="who">China <span class="correction-tag">corrected</span></div>
+        <div class="row"><b>KSA</b> O to G</div>
+        <div class="note">Top oil customer, Vision 2030 investor, brokered the 2023 Saudi-Iran détente. Beijing has strong, functioning ties to all three signatories and no reason to disrupt any of them.</div>
+      </div>
+      <div class="align-note">
+        <div class="who">Russia <span class="correction-tag">corrected</span></div>
+        <div class="row"><b>KSA</b> O to G</div>
+        <div class="note">OPEC+ coordination and a genuine hedge as Riyadh diversifies its arms suppliers beyond Washington move this from neutral to allied.</div>
+      </div>
+      <div class="align-note">
+        <div class="who">UAE <span class="correction-tag">corrected</span></div>
+        <div class="row"><b>KSA</b> G to R</div>
+        <div class="row"><b>PAK</b> G to R</div>
+        <div class="note">Two separate stories, same direction. Abu Dhabi and Riyadh present as Gulf partners but compete hard on Yemen policy, OPEC+ positioning, and which capital becomes the region's business hub, closer to rivalry than alliance on the ground. Toward Pakistan, the UAE has deported Pakistani expatriates and pressed for loan repayment, a real cooling this report treats as significant enough to flip the cell.</div>
+      </div>
+    </div>
+
+    <h3 class="subhead" id="sec-asymmetry">The asymmetry finding</h3>
+    <div class="finding">
+      <p class="thesis">Pakistan is stuck with this deal. Saudi Arabia and Turkey can walk away from it whenever they like.</p>
+      <p>Islamabad pays with the one thing it has plenty of: soldiers and aircraft. It cannot say no, because Saudi deposits, deferred oil, and remittances worth six to seven billion dollars a year are the price of saying no. Riyadh and Ankara pay with money and equipment instead, and keep the right to judge each crisis on its own terms before committing to anything more. Pakistan sends troops out. Money comes in. The pact turns the Pakistan Army into hired muscle for Gulf security, paid for in balance of payments support.</p>
+      <p>This is not a coincidence. It is the pattern. The more tangled up a country is in the wider web of trade, finance, and diplomacy, the less you can count on it to fight. Pakistan has the fewest of those outside ties of the three signatories. That is exactly why it is the one that has already sent troops.</p>
+    </div>
+
+    <h3 class="subhead" id="sec-costs">What this costs India</h3>
+    <p>No extra enemy troops show up on the Punjab front because of this pact. Three other things happen instead.</p>
+    <ol class="costs">
+      <li><b>Recapitalisation.</b> Turkish drones, loitering munitions, naval platforms, and Saudi money reach Pakistan in peacetime and sustain it through a short war. The materiel pipeline is the near certain outcome in every India scenario in this model.</li>
+      <li><b>Clock compression.</b> Two more capitals now carry a treaty argument for early crisis termination into Washington and Beijing. India's punitive window shortens, which is a planning constraint rather than a battlefield one.</li>
+      <li><b>Escalation tolerance.</b> Saudi financial backstopping raises the punishment Pakistan can absorb, which blunts the economic and diplomatic instruments India reaches for below the military threshold.</li>
+    </ol>
+    <p>India's strategy should leverage Saudi Arabia rather than oppose it. Riyadh's economic stake in India far outweighs its ties to Pakistan, and it consistently acts to end crises rather than fuel them. The real challenge is Turkey, which India should counter through defence-industrial moves and Eastern Mediterranean partnerships rather than in the Gulf. Meanwhile, the UAE, whose ties with both Riyadh and Islamabad are cooling, remains an underused strategic lever for New Delhi.</p>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TAB: ACTIVATION MODEL -->
+  <!-- ============================================================ -->
+  <section class="tabpage" id="tab-model" style="display:none;">
+    <div class="part-label">Part Two</div>
+    <h2>Activation model</h2>
+    <nav class="section-index">
+      <a href="#sec-ladder">Response ladder</a>
+      <a href="#sec-calculator">The crisis calculator</a>
+      <a href="#sec-mechanisms">Why the network decides</a>
+    </nav>
+    <p class="lede">The crisis layer is conditional: it only switches on if a specific enemy actually attacks a member state, and it sits on top of the standing layer and nuclear overlay covered on the Preconflict Situation Monitoring tab. Use the controls below to move through it.</p>
+
+    <h3 class="subhead" id="sec-ladder">Response ladder</h3>
+    <p class="lede">Alliance behaviour is measured on six rungs, T0 to T5. A partner discharges its obligation at the lowest rung the crisis permits, and every T-number used elsewhere in this report refers back to this table.</p>
+    <div class="table-wrap">
+      <table class="ladder-table">
+        <tbody>
+          <tr><td class="rung">T0</td><td><b>Statement.</b> Condemnation, emergency OIC session, joint communiqué.</td></tr>
+          <tr><td class="rung">T1</td><td><b>Diplomacy and finance.</b> Central bank deposits, deferred oil, lobbying in Washington and Beijing, shuttle mediation.</td></tr>
+          <tr><td class="rung">T2</td><td><b>Materiel.</b> Munitions, drones, spares, strategic airlift, satellite and signals feed.</td></tr>
+          <tr><td class="rung">T3</td><td><b>Enablers forward.</b> Air defence detachments, advisers, tankers, basing and overflight.</td></tr>
+          <tr><td class="rung">T4</td><td><b>Combat engagement</b> inside the victim's theatre.</td></tr>
+          <tr><td class="rung">T5</td><td><b>Belligerency.</b> Strikes on the aggressor's homeland.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead" id="sec-calculator">The crisis calculator</h3>
+    <div class="engine-box">
+      <div class="mode-toggle">
+        <button id="modeDefensive" class="active" type="button">Signatory attacked: defensive</button>
+        <button id="modeOffensive" type="button">Signatory is the aggressor: offensive</button>
+      </div>
+      <p class="posture-note" id="modeHint">Article 5 case: a named outsider hits a signatory. The other two price their treaty obligation.</p>
+      <div class="engine-grid">
+        <div class="field">
+          <label id="labA">Aggressor</label>
+          <select id="selA"></select>
+        </div>
+        <div class="field">
+          <label id="labV">Victim (signatory)</label>
+          <select id="selV"></select>
+        </div>
+        <div class="field">
+          <label>Conflict class</label>
+          <select id="selConflict"></select>
+        </div>
+      </div>
+      <div class="conflict-note">
+        <div class="trig" id="trigRow">Treaty trigger: <b id="trigLabel"></b></div>
+        <p id="conflictNote" style="margin:0 0 14px;"></p>
+        <div id="nukeBridge" class="nuke-bridge">This is the conflict class where the nuclear overlay on the Preconflict Situation Monitoring tab stops being background reading and starts actually mattering. Check the flows tagged for the pairing you have selected.</div>
+        <div class="treaty-toggle"><span>Treaty weight: how much the pact itself adds, isolated from everything a partner would do anyway</span><b id="treatyVal">+2</b></div>
+        <input type="range" id="treatySlider" min="0" max="4" step="0.5" value="2">
+        <div class="engine-hint">Drag to 0 to see what survives once the treaty itself is subtracted out. The answer, in most cells, is: most of it. The standing layer on the Preconflict tab and the brakes below were already there before Mecca.</div>
+        <div class="indian-concern" id="indianConcern">
+          <div class="ic-label">Indian concern</div>
+          <div class="ic-level" id="icLevel">&nbsp;</div>
+          <div class="ic-note" id="icNote">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="engineResults"></div>
+
+    <div class="engine-box counter-box">
+      <div class="mech-num" style="color:var(--blue);">Reactive agent</div>
+      <h3 style="font-family:var(--sans);font-weight:800;font-size:19px;margin:6px 0 12px;" id="counterHead">What the aggressor does back</h3>
+      <div id="counterMoves"></div>
+    </div>
+
+    <h3 class="subhead" id="sec-mechanisms">Why the network decides</h3>
+    <p class="lede">A signatory gets less willing to fight for a partner the more outside relationships it has to protect. Four mechanisms explain why, and each one works through a country's other relationships, not through the fight directly in front of it. Set the aggressor and victim in the model above to any pairing below and these same four mechanisms reappear as named drivers and brakes.</p>
+
+    <div class="mech">
+      <div class="mech-num">Mechanism 01</div>
+      <h3>Hegemonic Check</h3>
+      <p>Countries that rely on the United States for their military protection will not attack other US-backed nations, because they cannot afford to jeopardise their own security deal with Washington. Saudi Arabia and Turkey are held back from striking Israel, or from acting against India, not out of fear of those countries themselves. Doing so would anger the US. In the end, dependence on the same powerful patron is the brake that stops these conflicts before they start.</p>
+      <div class="active-in"><b>Strongest against</b> Israel as aggressor, any victim, and against India in shorter, lower-stakes conflicts</div>
+    </div>
+
+    <div class="mech">
+      <div class="mech-num">Mechanism 02</div>
+      <h3>Customer Brake: Commercial Deterrence</h3>
+      <p>A country will not turn against a major economic partner, because doing so would badly damage its own economy. Saudi Arabia stays neutral in an India-Pakistan conflict because Riyadh depends on Indian oil purchases, billions of dollars in shared investment, and millions of Indian workers sending money home. These financial ties act as a hard stop. They block military involvement before it can even start.</p>
+      <div class="active-in"><b>Strongest against</b> India as aggressor, Saudi Arabia specifically, across every conflict class</div>
+    </div>
+
+    <div class="mech">
+      <div class="mech-num">Mechanism 03</div>
+      <h3>Home-Front Limit</h3>
+      <p>A country will not fight on a partner's behalf if doing so opens a new front on its own soil. Pakistan shares a long, unstable border with Iran, has its own Baloch insurgency, and has a large Shia population it cannot afford to alienate. It will help defend Saudi Arabia's airspace, but it will not send troops into Iran itself. The risk of blowback at home outweighs the treaty obligation.</p>
+      <div class="active-in"><b>Strongest against</b> Iran as aggressor, and against any actor once the victim shares a land border with the aggressor</div>
+    </div>
+
+    <div class="mech">
+      <div class="mech-num">Mechanism 04</div>
+      <h3>Token Fulfillment</h3>
+      <p>When a defence treaty has no automatic trigger and no shared command, countries reach for symbolic or indirect support instead: cash, weapons, use of airspace, a vote at the UN, to say they have honoured the pact without actually fighting. This lets a country keep the treaty on paper while staying out of the war and protecting its own wider interests. It is why pacts like the 2000 GCC provision and the 2025 Saudi-Pakistan agreement produce weapons purchases and bank deposits, not army divisions marching to battle.</p>
+      <div class="active-in"><b>Holds in</b> nearly every pairing at Sub-conventional, Limited punitive, and Extended conventional class<br><b>Fails only</b> where troops are already on the ground and contact becomes unavoidable, Pakistan against Iran being the one live case</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TAB: CASE FILES -->
+  <!-- ============================================================ -->
+  <section class="tabpage" id="tab-cases" style="display:none;">
+    <div class="part-label">Part Three</div>
+    <h2>Case files</h2>
+    <p class="lede">Eight scenarios matched to the questions people actually ask about this pact. Each card loads straight into the Activation Model with the right controls already set.</p>
+    <div class="case-grid" id="caseGrid"></div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TAB: VIEW FROM DELHI -->
+  <!-- ============================================================ -->
+  <section class="tabpage" id="tab-delhi" style="display:none;">
+    <div class="part-label">Part Four</div>
+    <h2>The view from Delhi</h2>
+    <nav class="section-index">
+      <a href="#sec-posture">Posture by case</a>
+      <a href="#sec-indicators">Indicators to monitor</a>
+    </nav>
+    <p>India is not a signatory, but it is the country every case file above eventually comes back to. Delhi is hostile with Pakistan, warm and heavily invested with Saudi Arabia, and manages a strained but transactional relationship with Türkiye. Three very different relationships pointing at the same triangle, which is exactly why the Hegemonic Check and the Customer Brake both end up pointing at New Delhi, not just at Washington or Riyadh.</p>
+
+    <h3 class="subhead" id="sec-posture">Posture by case</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Case</th><th>Posture</th><th>Primary lever</th></tr></thead>
+        <tbody>
+          <tr><th>A: Israel to Turkish forces, Syria</th><td>Monitoring, low salience</td><td>None expected</td></tr>
+          <tr><th>B: Israel to Turkish homeland</th><td>Lesson-drawing</td><td>Used rhetorically, not acted on</td></tr>
+          <tr><th>C: India to Pakistan, limited strikes</th><td>Protest, welcomes mediation</td><td>Trade &amp; contract review (Türkiye)</td></tr>
+          <tr><th>D: India-Pakistan, extended war</th><td>Clock compression</td><td>Gulf diplomacy + Ankara downgrade</td></tr>
+          <tr><th>E: Iran to Saudi Arabia</th><td>Neutral facilitator</td><td>Quiet reassurance, energy ties</td></tr>
+          <tr><th>F: Houthis to Saudi Arabia</th><td>Shipping-lane watch</td><td>Maritime-security coordination</td></tr>
+          <tr><th>G: Iran to Pakistani territory</th><td>Filed as precedent</td><td>Banking evidence, not sympathy</td></tr>
+          <tr><th>H: Pakistan to India (offensive)</th><td>India's own action</td><td>Differentiated Saudi vs Turkish posture</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead" id="sec-indicators">Indicators to monitor</h3>
+    <div class="indicators">
+      <div class="ind-card early">
+        <div class="chip">Early warning</div>
+        <ul>
+          <li>Turkish resupply flight or shipment announcements during a live Pakistan-related crisis window</li>
+          <li>Saudi central bank deposit or deferred-oil-facility announcement timed to a crisis</li>
+          <li>Emergency OIC session convened</li>
+          <li>Pakistani squadron or air-defence assets observed moving between the Gulf and the western front</li>
+        </ul>
+      </div>
+      <div class="ind-card concern">
+        <div class="chip">High concern</div>
+        <ul>
+          <li>Formal MJDA consultation invoked, not just bilateral outreach</li>
+          <li>A joint Gulf-Ankara statement naming India directly</li>
+          <li>Any signatory visibly refusing Token Fulfillment, declining to let money or materiel stand in for combat</li>
+          <li>Turkish leadership statements on independent nuclear capability recurring or hardening beyond the February 2026 Foreign Ministry remark, especially paired with NPT-status commentary or missile-range disclosures</li>
+        </ul>
+      </div>
+      <div class="ind-card escalation">
+        <div class="chip">Escalation</div>
+        <ul>
+          <li>Pakistani forces deployed in the Gulf (Case E posture) recalled toward the India front mid-crisis, the clearest tripwire linking the two theatres</li>
+          <li>A fourth state, Qatar has been floated, moving toward accession during a live crisis</li>
+          <li>Chinese statements moving from neutral observer to explicit backing of Pakistan mid-crisis</li>
+          <li>The 2028 Turkish election cycle, and whether it shifts Ankara's calculus on any of the above</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TAB: INDIA'S RESPONSE -->
+  <!-- ============================================================ -->
+  <section class="tabpage" id="tab-response" style="display:none;">
+    <div class="part-label">Part Five</div>
+    <h2>India's strategic response</h2>
+    <nav class="section-index">
+      <a href="#track-01">01 Blunt the flow</a>
+      <a href="#track-02">02 Dissuade Saudi</a>
+      <a href="#track-03">03 Deter Turkey</a>
+      <a href="#track-04">04 Dissuade Pakistan</a>
+      <a href="#track-05">05 Own capabilities</a>
+      <a href="#track-06">06 Six relationships</a>
+      <a href="#track-07">07 Keep Pakistan embroiled</a>
+      <a href="#track-08">08 Domestic cost to Army</a>
+      <a href="#track-09">09 Contest the framing</a>
+      <a href="#track-10">10 Narrative discipline</a>
+    </nav>
+    <p class="lede">Ten tracks, run together rather than in sequence. None of them require India to be a party to the pact, and several work precisely because India stays outside it.</p>
+
+    <div class="track" id="track-01">
+      <div class="track-num">01</div>
+      <div class="track-body">
+        <h3>Pre-conflict: blunt the standing flow itself</h3>
+        <div class="track-dek">Riyadh's deposits and Ankara's drones are not new capability the treaty created. They are existing bilateral flows the treaty now names. India's leverage sits upstream of the text, not inside it.</div>
+        <p>Publicly linking Indian pressure to the MJDA is self-defeating. It hands Rawalpindi a grievance narrative. It also forces Riyadh to choose sides in the open, and that works against India, not for it. A public fight forces a real choice. A quiet approach lets Riyadh keep hedging, and hedging favours restraint. The lower-cost move is simpler: keep India's own stake with Riyadh large and visibly growing, the 43 billion dollar trade relationship, 2.7 million workers, the pledged hundred billion dollar investment, the IMEC anchor. Saudi Arabia will then police its own deposits without India having to ask.</p>
+        <p>Turkey offers no equivalent brake, so the tool has to be different. Extend procurement exclusion, the 2025 Çelebi security-clearance precedent, systematically rather than case by case, across ports, infrastructure, and defence-adjacent contracts. Coordinate quietly with export-control partners on the component supply chains, engines, optics, seekers, that feed the Bayraktar and Akıncı families reaching Pakistan.</p>
+        <p>Context on scale: Saudi support of roughly eight billion dollars covers a meaningful share of Pakistan's fiscal deficit, itself running around 3.3 trillion rupees. That kind of capital infusion is a temporary survival mechanism for Islamabad, not a path to sustainable prosperity, which is exactly why the flow matters more than any single scenario.</p>
+        <div class="lever-tag">Customer Brake (Saudi)</div><div class="lever-tag">Procurement exclusion (Turkey)</div><div class="lever-tag">Export-control coordination</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-02">
+      <div class="track-num">02</div>
+      <div class="track-body">
+        <h3>Dissuade Saudi Arabia from expanding funding</h3>
+        <div class="track-dek">Riyadh is already the model's clearest brake case. The task is to keep that arithmetic intact, not to threaten it.</div>
+        <p>Deepen IMEC implementation to the point where Saudi participation is a visible, running asset rather than an announced pledge, a switching cost that grows every quarter it operates. Keep the investment pipeline drawing down, not just promised. Treat the 2.7 million worker relationship and remittance flow as a standing argument in the bilateral channel, not a card played once in a crisis.</p>
+        <p>Reserve explicit signalling for one threshold only: Saudi financing that moves from balance of payments support to funding specific offensive systems. That distinction is worth making through the existing strategic-dialogue and NSA-level channel, not through public statements, since Riyadh has already done India's work by publicly placing MJDA outside the category of a military axis. Reinforce that framing rather than contest it.</p>
+        <div class="lever-tag">IMEC</div><div class="lever-tag">Investment pipeline</div><div class="lever-tag">Quiet threshold signalling</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-03">
+      <div class="track-num">03</div>
+      <div class="track-body">
+        <h3>Deter Turkey: no Customer Brake, so use a bouquet of other tools</h3>
+        <div class="track-dek">Ankara is, in the model's own words, the one signatory with nothing to protect in New Delhi. It sold Pakistan resupply once already and has no commercial relationship with India large enough to discipline it. Since no single lever does the job, use several at once.</div>
+        <p>The trade and defence-procurement relationship is thin, so treat it as purely transactional rather than diplomatic: extend the exclusion pattern already begun, keeping it procedural and security-grounded rather than punitive in language. Deepen the existing defence-industrial and diplomatic relationships with Greece, Cyprus, and Armenia, states with their own reasons to raise Ankara's regional costs, since the alignment matrix already marks all three red or amber against Turkey.</p>
+        <p>Two live grievances worth understanding on Ankara's own side, because they explain its behaviour rather than excuse it. Turkish planners were reportedly upset that IMEC terminates at Haifa and Piraeus with no branch reaching Turkey, and Ankara separately wants to use Pakistan as its route into Central Asia via the Middle Corridor connectivity project. Both point to the same opening: commercial and defence-industrial engagement on India's own terms, supplying engines and auto parts for instance, gives Turkey a reason to calculate rather than simply align with Islamabad.</p>
+        <ul>
+          <li><b>Use India-EU ties.</b> Turkey's own EU accession track and its trade relationship with Brussels give India a second address to raise concerns at, one that does not run through Washington and carries its own weight with Ankara.</li>
+          <li><b>Use India-US relations.</b> Turkey's NATO membership means Washington already has more leverage over Ankara's behaviour than India does. Align India's concerns with existing American and European unease about Turkish drone exports rather than raising a lone Indian voice.</li>
+          <li><b>Reduce people-to-people ties.</b> Tourism, education exchanges, and cultural programming are a low-cost, easily reversible signal. Scaling them back costs India little and gives Ankara a visible, deniable-enough consequence.</li>
+          <li><b>Use Russia.</b> Moscow's own relationship with Ankara, energy, Syria, defence sales, gives India a second channel to shape Turkish behaviour indirectly, through a partner Turkey also has to manage carefully.</li>
+          <li><b>Enhance defence-tech and production ties with Israel.</b> Israel already shares India's concern about Turkish drone proliferation. Deepen joint development and production specifically in the UAS and loitering-munition space, both to build India's own counter-capability and to signal that Turkey's Pakistan-facing drone business has a cost on the other side of the ledger.</li>
+        </ul>
+        <p style="font-size:14px;color:var(--text-faint);">Watch item: the 2028 Turkish election cycle could shift this calculus meaningfully in either direction and is worth tracking on its own timeline.</p>
+        <div class="lever-tag">Procurement exclusion</div><div class="lever-tag">Greece / Cyprus / Armenia</div><div class="lever-tag">EU pressure</div><div class="lever-tag">US alignment</div><div class="lever-tag">People-to-people drawdown</div><div class="lever-tag">Russia channel</div><div class="lever-tag">Israel defence-tech</div><div class="lever-tag">Engines &amp; auto parts</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-04">
+      <div class="track-num">04</div>
+      <div class="track-body">
+        <h3>Dissuade Pakistan from adventurism</h3>
+        <div class="track-dek">The asymmetry finding already does most of this work: Rawalpindi is bound, not covered. No case file above puts a Gulf partner in India's theatre.</div>
+        <p>The task is making that legible to Pakistan's own general staff, not just to outside audiences. Continue the post-2019 and post-Sindoor pattern of demonstrating that limited retaliation draws no outside intervention. Case G's own precedent, Iran's January 2024 strike into Balochistan met with statements only, is the proof of concept and belongs in India's own deterrence signalling, explicitly. Terrorism remains the primary risk to manage here, the elephant in the room that no amount of alliance modelling substitutes for a clear, robust reaction strategy against.</p>
+        <p>Hold escalation dominance specifically at the sub-conventional and limited-punitive tiers, since that is where the pact's brakes bind hardest: Riyadh mediates rather than arms, Ankara resupplies rather than fights. That is precisely the tier India is most likely to operate at, and precisely where its hand stays freest.</p>
+        <div class="lever-tag">Doctrine signalling</div><div class="lever-tag">Escalation dominance below T3</div><div class="lever-tag">FATF / IMF leverage</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-05">
+      <div class="track-num">05</div>
+      <div class="track-body">
+        <h3>Strengthen India's own capabilities</h3>
+        <div class="track-dek">The model names two concrete costs. Both have a specific counter, not a generic one.</div>
+        <ul>
+          <li><b>Recapitalisation.</b> The threat class flowing to Pakistan is named and known: Bayraktar-family UAS, loitering munitions, naval platforms. Counter-drone and counter-swarm investment should be sized against that specific inventory, not against UAS threats in general.</li>
+          <li><b>Clock compression.</b> Two more capitals now carry an early-termination argument into Washington and Beijing. The direct counter is speed: keep the punitive decision cycle inside the 72 to 96 hour Sindoor window rather than needing to extend it, and pre-position the Gulf and Washington diplomatic channels before a crisis rather than building them during one.</li>
+        </ul>
+        <div class="lever-tag">Counter-UAS, threat-specific</div><div class="lever-tag">Decision-cycle compression</div><div class="lever-tag">Pre-positioned channels</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-06">
+      <div class="track-num">06</div>
+      <div class="track-body">
+        <h3>Israel, Iran, Afghanistan, the United States, the UAE, the Houthis</h3>
+        <div class="track-dek">Six different relationships, six different jobs. None of them should look coordinated from outside.</div>
+        <p><b>Israel.</b> Shared interest in tracking Turkish drone proliferation and in the broader Pakistan-adjacent risk picture. Deepen defence-industrial and intelligence ties on UAS and loitering-munition counters specifically, and keep it quiet. A visibly close India-Israel axis complicates Riyadh's own normalisation file, a relationship India benefits from Riyadh managing carefully, and many Middle Eastern governments are currently critical enough of Israel's regional conduct that overt alignment carries its own cost.</p>
+        <p><b>Iran.</b> The neutral-facilitator framing for Case E is correct but underused as a strategic asset. The Iran-Pakistan Home-Front Limit, the 900 kilometre frontier, the Baloch militancy that runs both directions, the Shia population Islamabad cannot offend, is a fact of geography India can lean on without doing anything provocative. Chabahar and INSTC investment give Delhi a legitimate non-military reason to keep deepening the relationship, and every dollar spent there raises Tehran's stake in staying closer to Delhi than to Rawalpindi or Ankara.</p>
+        <p><b>Afghanistan.</b> The alignment matrix already marks Kabul red against Pakistan. That is real, low-cost leverage: aid, trade routed through Chabahar, and quiet security dialogue sustain a live second front on Pakistan's western border that India does not have to manufacture, only sustain. Keep it coded as humanitarian and economic engagement to avoid the domestic and international costs of visible embrace.</p>
+        <p><b>United States.</b> Every MJDA member except Pakistan buys its security from Washington. The Hegemonic Check is the single most load-bearing mechanism in the whole model. India's job is to keep that fact working in its favour by sustaining its own defence and technology relationship with Washington, so the American incentive to restrain Riyadh and Ankara in any India-Pakistan crisis stays aligned with Delhi rather than neutral, while also watching for daylight between the US administration and its own security establishment, which India can sometimes use.</p>
+        <p><b>The UAE.</b> Now the most underused relationship in this list. The matrix correction above puts Abu Dhabi at odds with both Riyadh and Islamabad: a genuine intra-Gulf rivalry with Saudi Arabia, and a cooling, near-transactional relationship with Pakistan following deportations of Pakistani workers and demands for loan repayment. A UAE that acts as an independent, sometimes assertive power in its own right, not simply a junior Gulf partner, is a real opening. Explore a trilateral security and economic conversation involving India, the UAE, and France, which already hosts a base in the UAE and keeps close ties there, as a concrete next step rather than a vague aspiration.</p>
+        <p><b>Houthis.</b> Not an Indian instrument and should not become one. India's interest is commercial shipping and energy security through the Red Sea corridor, and the existing maritime-security coordination already covers it. Note for the record only: claims of a Pakistani mechanized division engaging in Houthi-adjacent operations have circulated but remain unverified by this report and should not be treated as established fact.</p>
+        <div class="lever-tag">India-UAE-France</div><div class="lever-tag">Quiet Israel coordination</div><div class="lever-tag">Chabahar / INSTC</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-07">
+      <div class="track-num">07</div>
+      <div class="track-body">
+        <h3>Keep Pakistan embroiled in the Middle East</h3>
+        <div class="track-dek">India cannot order a deployment it has no standing to command. It can shape the incentives at the margin, and largely already has, without trying.</div>
+        <p>Pakistan's Gulf posture, the squadron and air defence garrisoned in the Kingdom since May 2026, is voluntary and treaty-driven. The honest lever is not Indian pressure on Islamabad but Indian engagement with Tehran: the deeper India's Chabahar and INSTC-adjacent relationship with Iran runs, the harder it becomes for Pakistan to fully disengage from its own western border to focus east, because a military leaning hard into a Sunni Gulf axis against a state it shares 900 kilometres of frontier and a large Shia population with accumulates its own instability on that border independent of anything India does.</p>
+        <p>The posture to avoid is visible orchestration. If Rawalpindi can plausibly claim India is engineering its Gulf entanglement, that becomes a unifying nationalist narrative rather than a cost. The better position is passive benefit: let the treaty's own asymmetry, Pakistan bound and its Gulf partners optional, do the work, while India's Iran and Afghanistan engagement quietly raises what it costs Rawalpindi to look east instead of west.</p>
+        <div class="lever-tag">Chabahar / INSTC</div><div class="lever-tag">Passive benefit, not orchestration</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-08">
+      <div class="track-num">08</div>
+      <div class="track-body">
+        <h3>Make the Gulf commitment domestically costly for the Pakistan Army</h3>
+        <div class="track-dek">The least controllable track, and worth saying so plainly: India cannot compel a sovereign partner-state's deployments. The lever is indirect: amplify a dynamic the model already shows running on its own.</div>
+        <p>Pakistan already peaked at T4 in the Gulf, the only rung the pact has actually reached, while receiving balance of payments support in return. Manpower out, money in. That is a real domestic story: soldiers garrisoning Saudi Arabia while the home economy runs on IMF conditionality is not an easy trade to defend to a Pakistani public already living with the cost of it.</p>
+        <p>India should not originate that narrative. A critique landing as visibly Indian in origin is worse than useless inside Pakistan; it converts a real grievance into a loyalty test. The realistic role is to make the underlying facts, deployment numbers, casualty reports, remittance-versus-relief accounting, verifiable and available through open-source tracking that Pakistani press, diaspora commentary, and opposition politics can pick up on their own terms. This dovetails with Track 07: the more bandwidth and domestic political capital the Army spends on Gulf commitments, the less it has for adventurism against India, and the more exposed it becomes to the Baloch and sectarian blowback the Home-Front Limit already predicts.</p>
+        <div class="lever-tag">Open-source verification, not origination</div><div class="lever-tag">Complements Track 07</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-09">
+      <div class="track-num">09</div>
+      <div class="track-body">
+        <h3>Do not let the civilizational framing go uncontested</h3>
+        <div class="track-dek">Pakistan and Türkiye have separate reasons to cast India's domestic politics as a threat to Muslims rather than a bilateral dispute. Islamabad's reason is obvious. Ankara's is different: Erdoğan's foreign policy has long used the language of Muslim solidarity to position Turkey as a rival seat of Islamic leadership, distinct from Riyadh's, including its own framing as guardian of Islamic holy sites.</div>
+        <p>This runs on a different logic from the rest of the model. It does not need economic interest to work. Unlike material solidarity, a shared-threat narrative can strengthen a coalition rather than fragment it.</p>
+        <p>The counter is diplomatic and informational, not domestic; see Track 10 for the domestic complement. Contest specific claims promptly. Do not let them sit uncontested. Lean into the fact that Riyadh, Cairo, and Abu Dhabi have their own incentive not to hand Ankara sole custody of the defender-of-Muslims role. India's task is less about managing one bloc than about keeping the Gulf-Ankara rivalry from resolving in Ankara's favour on this specific narrative.</p>
+        <div class="lever-tag">OIC narrative contest</div><div class="lever-tag">Riyadh-Ankara-Cairo rivalry wedge</div><div class="lever-tag">Rapid response to claims</div>
+      </div>
+    </div>
+
+    <div class="track" id="track-10">
+      <div class="track-num">10</div>
+      <div class="track-body">
+        <h3>Domestic narrative discipline: make the visibility work for India, not against it</h3>
+        <div class="track-dek">Every foreign-policy choice in this document carries a domestic-visibility cost, and none of them are priced in isolation. Internationally visible domestic communal friction is not separate from the Israel relationship, the Gulf relationship, or the OIC contest in Track 09; it is the raw material that makes all three harder. Pakistan and Türkiye have an identity-based reason to exploit it; China has a purely opportunistic one, since the narrative works whether or not Beijing's own record is consistent with it.</div>
+        <p>The fact Pakistan and Türkiye need suppressed is not a secret India should be playing defence around. It is a fact India should be putting in front of people. India has the world's second-largest Muslim population, full citizens of a constitutional democracy, not a minority under external protection. That fact does not win the argument by existing quietly in a census table. It wins by being visible.</p>
+        <p>Concretely: Muslim representation as a standing, not ad hoc, part of the delegations India sends abroad to explain itself, a practice India has used before. Multi-party parliamentary outreach to foreign capitals after past crises has included Muslim MPs specifically for engagement with the Islamic world. Muslim officials, athletes, businesspeople, and cultural figures as a routine part of India's public diplomacy toward the Gulf and OIC-adjacent audiences, not wheeled out only when a crisis needs answering. A counter-narrative that leads with the population figure itself, stated plainly and often, rather than assumed to be self-evident.</p>
+        <p>This runs alongside, not instead of, minimising the flashpoints: inflammatory rhetoric that reaches international wire coverage, enforcement actions that draw OIC or foreign human-rights attention still cost India every time they happen. But a purely defensive posture concedes the frame to Pakistan and Türkiye by default. The offensive version costs India less than the tracks it protects, and it is the one lever in this document that does not require Delhi to wait for someone else to move first.</p>
+        <div class="lever-tag">Muslim representation in outreach</div><div class="lever-tag">Public diplomacy</div><div class="lever-tag">Population-fact messaging</div><div class="lever-tag">Flashpoint minimisation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TAB: READING THE PACT -->
+  <!-- ============================================================ -->
+  <section class="tabpage" id="tab-pact" style="display:none;">
+    <div class="part-label">Part Six</div>
+    <h2>Reading the pact correctly</h2>
+    <nav class="section-index">
+      <a href="#sec-doctrine">Seven things to hold in mind</a>
+      <a href="#sec-debate">Where our own analysts disagree</a>
+    </nav>
+    <p class="lede" id="sec-doctrine">Seven things worth holding in mind before treating any single number in this report as settled.</p>
+
+    <div class="doctrine-grid">
+      <div class="doctrine-card">
+        <div class="n">01</div>
+        <h4>It reads like Article 5. It has never behaved like one.</h4>
+        <p>Saudi Arabia has held a mutual-defence clause with the GCC since 2000 and with Pakistan bilaterally since September 2025. Neither has ever produced a NATO-style automatic mobilisation. Expect this pact to follow the same pattern: support that is context-specific, not automatic.</p>
+      </div>
+      <div class="doctrine-card">
+        <div class="n">02</div>
+        <h4>This may be an anti-Israel pact wearing an anti-India face.</h4>
+        <p>A recurring reading among regional analysts treats this as substantially a hedge against Israel's expanded operational reach and a growing doubt that the United States still provides adequate security cover, not primarily a vehicle aimed at India. Hold both readings at once rather than picking one.</p>
+      </div>
+      <div class="doctrine-card">
+        <div class="n">03</div>
+        <h4>Turkey is competing for religious leadership, not just backing an ally.</h4>
+        <p>Ankara's framing of itself as guardian of Islamic holy sites, its Ummah-leadership ambitions, and its interest in using Pakistan to reach Central Asia through the Middle Corridor all point to a Turkey pursuing its own status contest with Riyadh, not simple solidarity with Islamabad.</p>
+      </div>
+      <div class="doctrine-card">
+        <div class="n">04</div>
+        <h4>The nuclear question stays deliberately unresolved.</h4>
+        <p>Ambiguity has value to every party involved. Pakistan has never officially confirmed extending nuclear protection to Saudi Arabia, and Islamabad's own defence establishment has said nuclear weapons are not on the radar of this pact, while also declining to rule out that its capabilities generally would be available. Treat the nuclear dimension as unresolved, not denied.</p>
+      </div>
+      <div class="doctrine-card">
+        <div class="n">05</div>
+        <h4>Distance rations willingness as much as politics does.</h4>
+        <p>Pakistan already has a real logistics bridge into the Gulf: troops, jets, and an air-defence system on Saudi soil since mid-2026. It has no comparable bridge into Anatolia. Turkey has basing in Qatar and a Gulf posture; it has none in South Asia. Geography sets a hard ceiling under any political willingness this model computes.</p>
+      </div>
+      <div class="doctrine-card">
+        <div class="n">06</div>
+        <h4>An India-Pakistan war is the case that breaks the pattern hardest.</h4>
+        <p>Neither Riyadh nor Ankara has any incentive to be pulled into a nuclear-armed rivalry between two states with a decades-old territorial dispute. Expect diplomatic and rhetorical solidarity, not military entry, regardless of clause text.</p>
+      </div>
+      <div class="doctrine-card">
+        <div class="n">07</div>
+        <h4>Percentages describe judgment, not measurement.</h4>
+        <p>Every percentage in this report is an estimative band, not a calculation from hard data: under 5 pc remote, 5 to 20 pc unlikely, 40 to 60 pc roughly a coin flip, 60 to 80 pc likely, above 90 pc almost certain. The full treaty text has never been made public, so none of this is confirmed against the actual document.</p>
+      </div>
+    </div>
+
+    <div class="debate-box" id="sec-debate">
+      <div class="lbl">Where our own analysts disagree</div>
+      <p>This model is not a house consensus. In the working session that shaped it, one view held that India should not be overly concerned: the Pakistan-Turkey relationship is already substantial and unlikely to grow dramatically because of the new treaty, Saudi Arabia will likely maintain distance to protect its own India relationship, and fiscal constraints on both Pakistan and Turkey limit how much they can actually coordinate militarily against India.</p>
+      <p>The competing view held that even incremental military support for Pakistan has to be factored into India's planning regardless of how small it looks today, because formalising the treaty raises the scale of funding and technology transfer over time and compresses the window India has to achieve strategic gains in any future conflict. Both views are represented in this model. Neither has been resolved, and it would be dishonest to pretend otherwise.</p>
+    </div>
+
+    <div class="footnote">
+      This report is a working analytical model, not a forecast. The scenario and matrix figures rest on the original tracker built for this project; the four-mechanism breakdown, the case files, and the India-response tracks are analysis layered on top of that model rather than independently verified against outside sources. Treat every number here as an argument made legible, not a prediction.
+    </div>
+  </section>
+
+  <footer class="pagefoot">
+    MECCA JOINT DEFENCE AGREEMENT · Activation Estimate · Working analytical model, not a forecast
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================ TAB SYSTEM ============================ */
+  var TABS = [
+    {id:"overview", label:"01 · Overview"},
+    {id:"pre",      label:"02 · Preconflict Monitoring"},
+    {id:"map",      label:"03 · System Map"},
+    {id:"model",    label:"04 · Activation Model"},
+    {id:"cases",    label:"05 · Case Files"},
+    {id:"delhi",    label:"06 · View from Delhi"},
+    {id:"response", label:"07 · India's Response"},
+    {id:"pact",     label:"08 · Reading the Pact"}
+  ];
+  var tabButtonsEl = document.getElementById("tabButtons");
+  TABS.forEach(function(t){
+    var b = document.createElement("button");
+    b.type = "button"; b.dataset.tab = t.id; b.textContent = t.label;
+    if (t.id === "overview") b.classList.add("active");
+    b.addEventListener("click", function(){ showTab(t.id); });
+    tabButtonsEl.appendChild(b);
+  });
+  function showTab(id){
+    TABS.forEach(function(t){
+      var page = document.getElementById("tab-" + t.id);
+      if (page) page.style.display = (t.id === id) ? "" : "none";
+    });
+    Array.prototype.forEach.call(tabButtonsEl.querySelectorAll("button"), function(b){
+      b.classList.toggle("active", b.dataset.tab === id);
+    });
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".toclink"), function(btn){
+    btn.addEventListener("click", function(){ showTab(btn.dataset.goto); });
+  });
+
+  /* ============================ INTERACTIVE SYSTEM MAP ============================ */
+  var MAP_OUTER = ["USA","China","India","Iran","Israel","Russia","Qatar","UAE","Egypt","Azerbaijan","Greece & Cyprus","Armenia","Ansar Allah","Taliban Afghanistan","Somalia"];
+  var MAP_AB = {USA:"USA",China:"CHN",India:"IND",Iran:"IRN",Israel:"ISR",Russia:"RUS",Qatar:"QAT",UAE:"UAE",Egypt:"EGY",Azerbaijan:"AZE","Greece & Cyprus":"GRC",Armenia:"ARM","Ansar Allah":"ANS","Taliban Afghanistan":"TAL",Somalia:"SOM"};
+  var REL_COLOR = {ally:"#0d8a72", managed:"#9c6b1f", adversarial:"#b23a2d"};
+  var REL_LABEL = {ally:"Ally", managed:"Managed / transactional", adversarial:"Adversarial"};
+
+  var REL = {
+    USA: {
+      KSA:{type:"ally", desc:"Primary arms supplier and long-time security guarantor, though Riyadh is hedging after concluding US protection has limits, part of why this pact exists at all."},
+      PAK:{type:"ally", desc:"IMF board weight and FATF standing give Washington real leverage. A fluctuating but functioning relationship, not a fixed alliance."},
+      TUR:{type:"managed", desc:"A NATO ally in name. Strained by the S-400/F-35 dispute and diverging views on Israel."}
+    },
+    China: {
+      KSA:{type:"ally", desc:"Top oil customer and Vision 2030 investor. Brokered the 2023 Saudi-Iran détente."},
+      PAK:{type:"ally", desc:"The all-weather partner. CPEC, aircraft, air defence, missile technology, and reliable diplomatic cover."},
+      TUR:{type:"managed", desc:"Growing trade and Belt and Road interest, tempered by Ankara's occasional criticism of Uyghur policy."}
+    },
+    India: {
+      KSA:{type:"ally", desc:"Major energy customer and labour-migration partner. Riyadh stays neutral on India-Pakistan disputes to protect this relationship, the Customer Brake at work."},
+      PAK:{type:"adversarial", desc:"The core threat vector this entire pact exists to insure Pakistan against."},
+      TUR:{type:"managed", desc:"Correctable but currently strained. Erdoğan's Kashmir statements have drawn Indian trade retaliation before."}
+    },
+    Iran: {
+      KSA:{type:"adversarial", desc:"A fragile détente sits atop a real rivalry. Saudi Arabia has been struck repeatedly since February 2026."},
+      PAK:{type:"managed", desc:"Correct but cool. A shared Baloch insurgency problem and Sunni-Shia friction Islamabad works hard to contain."},
+      TUR:{type:"managed", desc:"Regional competitors, especially over Syria, who keep trade and diplomatic channels open regardless."}
+    },
+    Israel: {
+      KSA:{type:"managed", desc:"No formal relations. A pre-war normalisation track sits frozen alongside quiet historical contact against Iran."},
+      PAK:{type:"adversarial", desc:"No diplomatic relations. Pakistan has never recognised Israel."},
+      TUR:{type:"adversarial", desc:"Relations have collapsed since the Gaza war. This is Ankara's own principal threat vector under the pact."}
+    },
+    Russia: {
+      KSA:{type:"ally", desc:"OPEC+ coordination partner and a hedge as Riyadh diversifies its arms suppliers beyond Washington."},
+      PAK:{type:"managed", desc:"A warming but still secondary defence relationship, well behind Islamabad's ties to China."},
+      TUR:{type:"managed", desc:"NATO member Turkey buys Russian S-400s and depends on Russian energy, yet the two clash across Syria, Libya and the Caucasus."}
+    },
+    Qatar: {
+      KSA:{type:"ally", desc:"Reconciled Gulf partner after the 2017 to 2021 blockade. Now closely aligned on regional security."},
+      PAK:{type:"ally", desc:"A major LNG supplier and host to a large Pakistani expatriate workforce."},
+      TUR:{type:"ally", desc:"Turkey's closest Gulf relationship. A Turkish base in Doha dates to the depths of the 2017 blockade."}
+    },
+    UAE: {
+      KSA:{type:"adversarial", desc:"Presents as a Gulf partner but competes hard on Yemen policy, OPEC+ positioning, and which capital becomes the region's business hub. Closer to rivalry than alliance on the ground."},
+      PAK:{type:"adversarial", desc:"Cooling fast. Abu Dhabi has deported Pakistani expatriates and pressed for loan repayment."},
+      TUR:{type:"managed", desc:"Historically opposed across Libya, now in a cautious, business-led rapprochement."}
+    },
+    Egypt: {
+      KSA:{type:"ally", desc:"A close ally substantially dependent on Saudi financial support."},
+      PAK:{type:"ally", desc:"Traditional OIC-era defence and training ties, warm if less central than they once were."},
+      TUR:{type:"managed", desc:"Recovering from the rupture after Turkey's condemnation of the 2013 coup. Rapprochement is real but still cautious."}
+    },
+    Azerbaijan: {
+      KSA:{type:"ally", desc:"An aligned Turkic-Gulf partnership with growing energy and defence ties."},
+      PAK:{type:"ally", desc:"Close, including diplomatic solidarity on Kashmir in exchange for solidarity on Karabakh."},
+      TUR:{type:"ally", desc:"“One nation, two states.” The tightest relationship in this entire matrix."}
+    },
+    "Greece & Cyprus": {
+      KSA:{type:"managed", desc:"Distant but unproblematic. Routine EU-Gulf economic contact."},
+      PAK:{type:"managed", desc:"Minimal, low-friction ties with little strategic weight either way."},
+      TUR:{type:"adversarial", desc:"Aegean airspace and maritime-boundary disputes, the Cyprus question, and a long history of direct conflict. The EU's most persistent NATO-internal rivalry."}
+    },
+    Armenia: {
+      KSA:{type:"managed", desc:"Marginal, low-intensity ties. Neither state features much in the other's planning."},
+      PAK:{type:"adversarial", desc:"Pakistan is among the few UN members that has never recognised Armenia, tied to its alignment with Azerbaijan and Turkey."},
+      TUR:{type:"adversarial", desc:"A closed border since 1993, an unresolved genocide-recognition dispute, and consistent Turkish backing for Azerbaijan against Armenia."}
+    },
+    "Ansar Allah": {
+      KSA:{type:"adversarial", desc:"Riyadh's own Yemen-front adversary, active again since the pact's founding backdrop."},
+      PAK:{type:"managed", desc:"No direct quarrel. Islamabad has stayed carefully uninvolved."},
+      TUR:{type:"managed", desc:"No direct quarrel; Ankara treats this as outside its own theatre."}
+    },
+    "Taliban Afghanistan": {
+      KSA:{type:"managed", desc:"Correct, distant relations with limited strategic weight."},
+      PAK:{type:"adversarial", desc:"Deteriorated sharply. Cross-border militancy and TTP sanctuary claims dominate this relationship now."},
+      TUR:{type:"managed", desc:"Manageable, low-intensity contact."}
+    },
+    Somalia: {
+      KSA:{type:"ally", desc:"Development and security assistance ties, part of a broader Gulf footprint in the Horn of Africa."},
+      PAK:{type:"ally", desc:"Traditional OIC-era ties, training and peacekeeping cooperation."},
+      TUR:{type:"ally", desc:"One of Turkey's most consequential Africa relationships: a major base, port and airport investment, and a training programme."}
+    }
+  };
+
+  function buildSystemMap(){
+    var container = document.getElementById("netmapContainer");
+    if (!container) return;
+    var W=900, H=920, cx=450, cy=470, R=372, coreR=95;
+    var core = {
+      TUR:{x:cx, y:cy-coreR, col:"#c81e2c"},
+      KSA:{x:cx-coreR*0.87, y:cy+coreR*0.5, col:"#046a38"},
+      PAK:{x:cx+coreR*0.87, y:cy+coreR*0.5, col:"#01411c"}
+    };
+    var outerPos = {};
+    MAP_OUTER.forEach(function(name, i){
+      var angle = (Math.PI*2*i/MAP_OUTER.length) - Math.PI/2;
+      outerPos[name] = {x: cx + R*Math.cos(angle), y: cy + R*Math.sin(angle)*0.86};
+    });
+
+    var svg = '<svg id="netmap" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
+    svg += '<line x1="'+core.TUR.x+'" y1="'+core.TUR.y+'" x2="'+core.KSA.x+'" y2="'+core.KSA.y+'" stroke="#0d8a72" stroke-width="2.5"/>';
+    svg += '<line x1="'+core.TUR.x+'" y1="'+core.TUR.y+'" x2="'+core.PAK.x+'" y2="'+core.PAK.y+'" stroke="#0d8a72" stroke-width="2.5"/>';
+    svg += '<line x1="'+core.KSA.x+'" y1="'+core.KSA.y+'" x2="'+core.PAK.x+'" y2="'+core.PAK.y+'" stroke="#0d8a72" stroke-width="2.5"/>';
+
+    MAP_OUTER.forEach(function(name){
+      ["TUR","KSA","PAK"].forEach(function(k){
+        var r = REL[name][k];
+        svg += '<line class="spoke" data-node="'+name+'" x1="'+outerPos[name].x+'" y1="'+outerPos[name].y+'" x2="'+core[k].x+'" y2="'+core[k].y+'" stroke="'+REL_COLOR[r.type]+'" stroke-width="1.1" opacity="0.32"/>';
+      });
+    });
+
+    ["TUR","KSA","PAK"].forEach(function(k){
+      svg += '<circle cx="'+core[k].x+'" cy="'+core[k].y+'" r="31" fill="#ffffff" stroke="'+core[k].col+'" stroke-width="3"/>';
+      svg += '<text x="'+core[k].x+'" y="'+(core[k].y+5)+'" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="15" font-weight="700" fill="'+core[k].col+'">'+k+'</text>';
+    });
+
+    MAP_OUTER.forEach(function(name){
+      var p = outerPos[name];
+      svg += '<g class="mapnode" data-node="'+name+'">';
+      svg += '<circle cx="'+p.x+'" cy="'+p.y+'" r="23" fill="#fafafa" stroke="#5c5c5c" stroke-width="1.5"/>';
+      svg += '<text x="'+p.x+'" y="'+(p.y+4)+'" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="10.5" fill="#333333">'+MAP_AB[name]+'</text>';
+      svg += '</g>';
+    });
+    svg += '</svg>';
+    container.innerHTML = svg;
+
+    Array.prototype.forEach.call(container.querySelectorAll(".mapnode"), function(node){
+      node.addEventListener("click", function(){ selectMapNode(node.dataset.node); });
+    });
+  }
+
+  function selectMapNode(name){
+    var container = document.getElementById("netmapContainer");
+    Array.prototype.forEach.call(container.querySelectorAll(".mapnode"), function(n){
+      n.classList.toggle("selected", n.dataset.node === name);
+    });
+    Array.prototype.forEach.call(container.querySelectorAll(".spoke"), function(s){
+      s.style.opacity = (s.dataset.node === name) ? "0.9" : "0.12";
+      if (s.dataset.node === name) s.setAttribute("stroke-width","2.4");
+      else s.setAttribute("stroke-width","1.1");
+    });
+    var panel = document.getElementById("mapSidePanel");
+    var rel = REL[name];
+    var rowsHTML = ["TUR","KSA","PAK"].map(function(k){
+      var full = k==="TUR"?"Türkiye":k==="KSA"?"Saudi Arabia":"Pakistan";
+      var r = rel[k];
+      return '<div class="rel-row"><div class="head"><span class="who">'+full+'</span><span class="rel-tag" style="color:'+REL_COLOR[r.type]+';">'+REL_LABEL[r.type]+'</span></div><p>'+r.desc+'</p></div>';
+    }).join("");
+    panel.innerHTML = '<h3>'+name+'</h3><div class="role">Relationship to each signatory</div>' + rowsHTML;
+  }
+
+  buildSystemMap();
+
+  /* ============================ ENGINE DATA ============================ */
+  var MJDA = ["Turkey","Saudi Arabia","Pakistan"];
+  var OUT  = ["India","Iran","Israel","USA","China","Russia","Ansar Allah"];
+  var ALL  = MJDA.concat(OUT);
+  var AB   = {Turkey:"TUR","Saudi Arabia":"KSA",Pakistan:"PAK",India:"IND",Iran:"IRN",Israel:"ISR",USA:"USA",China:"CHN",Russia:"RUS","Ansar Allah":"ANS"};
+
+  var AFF0 = {
+    Turkey:         {"Saudi Arabia":2, Pakistan:3, India:-1, Iran:-1, Israel:-3, USA:1, China:0, Russia:0, "Ansar Allah":0},
+    "Saudi Arabia": {Turkey:2, Pakistan:2, India:2, Iran:-3, Israel:1, USA:2, China:2, Russia:2, "Ansar Allah":-3},
+    Pakistan:       {Turkey:3, "Saudi Arabia":3, India:-3, Iran:-1, Israel:-3, USA:1, China:3, Russia:0, "Ansar Allah":0},
+    India:          {Turkey:-1, "Saudi Arabia":2, Pakistan:-3, Iran:1, Israel:2, USA:2, China:-2, Russia:2, "Ansar Allah":0},
+    Iran:           {Turkey:-1, "Saudi Arabia":-3, Pakistan:-1, India:1, Israel:-3, USA:-3, China:2, Russia:2, "Ansar Allah":2},
+    Israel:         {Turkey:-3, "Saudi Arabia":1, Pakistan:-2, India:3, Iran:-3, USA:3, China:0, Russia:-1, "Ansar Allah":-3},
+    USA:            {Turkey:1, "Saudi Arabia":2, Pakistan:1, India:2, Iran:-3, Israel:3, China:-2, Russia:-2, "Ansar Allah":-3},
+    China:          {Turkey:0, "Saudi Arabia":2, Pakistan:3, India:-2, Iran:2, Israel:0, USA:-2, Russia:2, "Ansar Allah":0},
+    Russia:         {Turkey:1, "Saudi Arabia":2, Pakistan:0, India:2, Iran:2, Israel:-1, USA:-2, China:2, "Ansar Allah":0},
+    "Ansar Allah":  {Turkey:0, "Saudi Arabia":-3, Pakistan:0, India:0, Iran:2, Israel:-3, USA:-3, China:0, Russia:0}
+  };
+
+  var DEP0 = {
+    Turkey:         {"Saudi Arabia":1, Pakistan:1, India:0, Iran:2, Israel:0, USA:3, China:1, Russia:2, "Ansar Allah":0},
+    "Saudi Arabia": {Turkey:1, Pakistan:2, India:2, Iran:0, Israel:0, USA:3, China:2, Russia:1, "Ansar Allah":0},
+    Pakistan:       {Turkey:2, "Saudi Arabia":3, India:0, Iran:1, Israel:0, USA:2, China:3, Russia:0, "Ansar Allah":0},
+    India:          {Turkey:0, "Saudi Arabia":2, Pakistan:0, Iran:1, Israel:1, USA:2, China:1, Russia:2, "Ansar Allah":0},
+    Iran:           {Turkey:1, "Saudi Arabia":0, Pakistan:1, India:1, Israel:0, USA:0, China:3, Russia:2, "Ansar Allah":0},
+    Israel:         {Turkey:0, "Saudi Arabia":0, Pakistan:0, India:1, Iran:0, USA:3, China:1, Russia:0, "Ansar Allah":0},
+    USA:            {Turkey:1, "Saudi Arabia":1, Pakistan:0, India:1, Iran:0, Israel:0, China:2, Russia:0, "Ansar Allah":0},
+    China:          {Turkey:0, "Saudi Arabia":2, Pakistan:1, India:1, Iran:2, Israel:0, USA:2, Russia:1, "Ansar Allah":0},
+    Russia:         {Turkey:1, "Saudi Arabia":1, Pakistan:0, India:1, Iran:1, Israel:0, USA:0, China:2, "Ansar Allah":0}
+  };
+
+  var DEP_WHY = {
+    "Saudi Arabia|India": "Oil offtake, 2.7m workers, investment pledges, IMEC anchor",
+    "Saudi Arabia|USA": "Security guarantee, arms pipeline, dollar system",
+    "Pakistan|Saudi Arabia": "Central bank deposits, deferred oil, 6 to 7bn USD remittances",
+    "Pakistan|China": "CPEC, aircraft, air defence, ISR, missile technology",
+    "Pakistan|USA": "IMF board weight, FATF standing",
+    "Pakistan|Iran": "Border stability along Sistan and Balochistan",
+    "Turkey|USA": "NATO, Incirlik, F-16 and munitions pipeline",
+    "Turkey|Russia": "Gas, wheat, tourism, Syria deconfliction",
+    "Turkey|Iran": "Gas imports, trade corridor, Kurdish file",
+    "Iran|China": "Crude offtake under sanctions"
+  };
+
+  var BORDER = {"Turkey|Iran":1,"Pakistan|Iran":1,"Pakistan|India":1,"Pakistan|China":1,"India|China":1};
+  function hasBorder(a,b){ return !!(BORDER[a+"|"+b] || BORDER[b+"|"+a]); }
+
+  var INTERNAL = {
+    Iran: {Pakistan:3, "Saudi Arabia":2, Turkey:1},
+    India: {Pakistan:1},
+    Israel: {},
+    USA: {Pakistan:1},
+    China: {India:1},
+    "Ansar Allah": {"Saudi Arabia":1}
+  };
+  var INTERNAL_WHY = {
+    "Iran|Pakistan": "900 km frontier, Baloch militancy both ways, 30 to 40m Shia, Zainabiyoun recruitment precedent",
+    "Iran|Saudi Arabia": "Eastern Province, Houthi vector",
+    "India|Pakistan": "Baloch and TTP claims",
+    "Ansar Allah|Saudi Arabia": "Cross-border missile and drone reach into Saudi territory, a live capability since 2015"
+  };
+
+  var REACH = {
+    Turkey:         {"Saudi Arabia":2, Pakistan:1},
+    "Saudi Arabia": {Turkey:1, Pakistan:1},
+    Pakistan:       {"Saudi Arabia":3, Turkey:0}
+  };
+  var REACH_WHY = {
+    "Pakistan|Saudi Arabia": "Squadron, air defence and troops already deployed, May 2026",
+    "Pakistan|Turkey": "No projection route to Anatolia or the Levant",
+    "Turkey|Pakistan": "Materiel and advisers, no formations",
+    "Saudi Arabia|Pakistan": "Capital and airlift, no formations",
+    "Saudi Arabia|Turkey": "Capital and basing, no formations",
+    "Turkey|Saudi Arabia": "Naval, air and drone contribution feasible"
+  };
+  var REACH_CAP = [2,3,4,5];
+
+  var STANDING = [
+    {from:"Saudi Arabia", to:"Pakistan", kind:"Capital", tier:1,
+      note:"Deposits, deferred oil facility, order finance. Roughly eight billion dollars a year against a Pakistani fiscal deficit near 3.3 trillion rupees. Converts Pakistani requirements into contracts, and functions as survival financing rather than development capital."},
+    {from:"Turkey", to:"Pakistan", kind:"Materiel", tier:2,
+      note:"Loitering munitions, EW, battlefield networking, naval and submarine upgrades, joint air training. A second resupply channel through a NATO member."},
+    {from:"China", to:"Pakistan", kind:"Backbone", tier:2, outside:true,
+      note:"Aircraft, long range air defence, ISR, missile technology, C2. Predates the pact and is unaffected by it."},
+    {from:"Pakistan", to:"Saudi Arabia", kind:"Manpower", tier:3,
+      note:"Forward air defence, training cadre, garrison. Converts to engagement on contact."},
+    {from:"Pakistan", to:"Turkey", kind:"Training", tier:1,
+      note:"Institutional air force exchange, staff courses. The only existing Pakistan-Turkey technical channel, see the nuclear overlay for why it is not read as evidence of anything beyond its stated scope."}
+  ];
+
+  var CONFLICTS = {
+    "Sub-conventional": {mult:0.2, trigger:"Disputed", stake:0,
+      note:"Cross border raid or attributed terror action. Whether this meets the armed attack threshold is exactly what the treaty text leaves open. Islamabad wants a low bar against India. Riyadh wants a high one against Iran."},
+    "Limited punitive": {mult:0.7, trigger:"Arguable", stake:0.3,
+      note:"Seventy two to ninety six hours on the Sindoor pattern. Over before partners can mobilise anything but resupply and diplomacy."},
+    "Extended conventional": {mult:1.0, trigger:"Clear", stake:0.8,
+      note:"Weeks. Territory at issue. Sustainment decides the outcome, which favours the standing layer over the crisis layer."},
+    "Existential": {mult:1.3, trigger:"Clear", stake:1.6,
+      note:"Regime survival or the nuclear threshold in question. What actually decides events here is deterrence, not anything this model prices."}
+  };
+
+  var COUNTER = {
+    Iran: {
+      Pakistan: ["Reactivate Baloch militancy across a 900 km frontier, on the January 2024 precedent","Sectarian leverage inside a Shia population of 30 to 40 million","Press Beijing, which carries CPEC on one side and Iranian crude on the other"],
+      "Saudi Arabia": ["Houthi vector against shipping and infrastructure","Eastern Province agitation"],
+      Turkey: ["Kurdish file","Gas supply interruption"],
+      strategic: "A hardened pact pushes Tehran toward Delhi. Chabahar and the INSTC gain value, which is the opening India should take."
+    },
+    India: {
+      "Saudi Arabia": ["India's own equities, trade, workers, investment, are Riyadh's exposure, not Delhi's, and stay unspent unless Saudi funding crosses into offensive systems"],
+      Turkey: ["Deepen Cyprus, Greece and Armenia alignment","Procurement exclusion and diaspora pressure"],
+      strategic: "Delhi's counter runs through Riyadh rather than against it. Ankara is the vector that needs a direct answer."
+    },
+    Israel: {
+      Turkey: ["Kurdish and PKK file","Eastern Mediterranean energy alignment with Greece and Cyprus"],
+      "Saudi Arabia": ["Suspend the normalisation track"],
+      strategic: "Any Israeli action against Anatolia makes NATO the senior instrument and displaces this pact entirely."
+    },
+    USA: {strategic:"Every signatory except Pakistan buys its security from Washington. This scenario collapses the pact rather than testing it."},
+    China: {strategic:"Beijing is Pakistan's backbone. This scenario is incoherent while CPEC stands."},
+    Russia: {strategic:"No vector of consequence into any signatory."},
+    "Ansar Allah": {
+      "Saudi Arabia": ["Escalate missile and drone strikes on Saudi oil infrastructure and shipping lanes","Disrupt Red Sea shipping to build international pressure for a ceasefire on Ansar Allah's own terms"],
+      Pakistan: ["Limited leverage; Islamabad has stayed carefully uninvolved in the Yemen file"],
+      Turkey: ["No meaningful leverage; Ankara treats this as outside its own theatre"],
+      strategic: "Ansar Allah's leverage runs through Red Sea shipping and international pressure, not through any tie to Pakistan or Turkey. It is the one aggressor in this model that does not need a state patron to keep fighting."
+    }
+  };
+
+  var TIERS = [
+    {t:"T0", n:"Statement", d:"Condemnation, OIC session, communiqué"},
+    {t:"T1", n:"Finance and diplomacy", d:"Deposits, deferred oil, lobbying, mediation"},
+    {t:"T2", n:"Materiel", d:"Munitions, drones, spares, airlift, sensor feed"},
+    {t:"T3", n:"Enablers forward", d:"Air defence, advisers, tankers, basing"},
+    {t:"T4", n:"Combat in theatre", d:"Engagement inside the victim's airspace or ground"},
+    {t:"T5", n:"Belligerency", d:"Strikes on the aggressor's homeland"}
+  ];
+
+  var POSTURE = [
+    {t:"P−2", n:"Active restraint", d:"Public daylight, pressures the ally to stand down"},
+    {t:"P−1", n:"Quiet restraint", d:"Private pressure, no public daylight"},
+    {t:"P0",  n:"Neutral silence", d:"No comment, no change in behaviour"},
+    {t:"P1",  n:"Diplomatic cover", d:"Rhetorical support, blocks censure, no material change"},
+    {t:"P2",  n:"Sustained backing", d:"Existing or new material flows continue through the crisis"}
+  ];
+
+  var NUCLEAR = [
+    {from:"Saudi Arabia", to:"Pakistan", type:"Financial", status:"circumstantial", label:"CIRCUMSTANTIAL",
+      basis:"Four decades of funding hypothesis in the open literature. Riyadh denies it. Islamabad stated in September 2025 that the bilateral pact carries no nuclear umbrella.",
+      counter:"The US civil-nuclear arrangement gives Riyadh a safeguarded enrichment path, which weakens the finance-for-warheads logic. Two-track hedging is as consistent with the evidence.",
+      assessed:"40 to 60 pc, roughly even. The literature is genuinely split and both governments have consistent incentive to deny it regardless of the underlying fact."},
+    {from:"Pakistan", to:"Saudi Arabia", type:"Operational", status:"inferred", label:"INFERRED FROM POSTURE",
+      basis:"Saudi Arabia holds Chinese medium-range ballistic missiles at al-Sulayyil and al-Watah with no warhead source of its own. Pakistan is the only plausible supplier. Pakistani formations have garrisoned the Kingdom before.",
+      counter:"No custody arrangement has been observed. The product on sale may be ambiguity itself, since both parties benefit from the deterrent value of the question without either having to answer it.",
+      assessed:"5 to 20 pc, unlikely, for an actual custody or warhead-transfer arrangement existing today. The missile-without-warhead anomaly itself is not in dispute; what it implies is."},
+    {from:"Pakistan", to:"Turkey", type:"Technical", status:"hypothesis", label:"HYPOTHESIS, MOTIVE ELEVATED",
+      basis:"Capability access only, but the motive component firmed materially in February 2026, when Turkey's Foreign Minister stated Turkey needs a nuclear capability given international uncertainty, a foreign-ministry-level statement echoing the Turkish foreign minister's own 2019 remarks about regional threats, this time six months closer to the MJDA signature. Turkish enrichment ambition in the civil programme. The A.Q. Khan network as proof Pakistan has run such a channel before. Turkey has also separately disclosed a ballistic missile reportedly reaching 6,000 kilometres, which raises the stakes of the motive question without resolving the supplier question.",
+      counter:"The February statement is evidence of Turkish intent, not of a Pakistani supply channel. It names no partner, and a foreign minister citing international uncertainty reads at least as plausibly as leverage aimed at NATO's extended-deterrence debate as a genuine weapons announcement. No posture-level anomaly links Turkey to Pakistan the way the Saudi missiles do for the Saudi case. Turkey remains an NPT party under full safeguards and hosts US weapons at Incirlik under NATO nuclear sharing; detection would cost Pakistan its NATO-adjacent standing for a partner far less economically vital than Saudi Arabia.",
+      assessed:"5 to 20 pc, unlikely, for Pakistan specifically as the channel, up from remote. The statement and the missile disclosure raise confidence that Ankara wants the option, a claim about Turkish intent. Neither says anything about who would supply it. The indicator worth watching is whether Ankara pairs this rhetoric with an indigenous enrichment move or NPT-status signalling, not with anything Pakistan does."}
+  ];
+
+  function aff(a,b){ return a===b ? 0 : ((AFF0[a] && AFF0[a][b]) || 0); }
+  function dep(a,b){ return a===b ? 0 : ((DEP0[a] && DEP0[a][b]) || 0); }
+
+  function evaluate(D,V,A,conflict,treaty){
+    var cf = CONFLICTS[conflict];
+    var drivers = [], brakes = [];
+
+    drivers.push({k:"Treaty commitment (" + conflict.toLowerCase() + " multiplier " + cf.mult + ")", v: treaty*cf.mult});
+
+    var aDV = aff(D,V);
+    if (aDV) drivers.push({k:"Affinity with " + AB[V], v: aDV*0.8});
+    var dDV = dep(D,V);
+    if (dDV) drivers.push({k:"Dependence on " + AB[V], v: dDV*0.5});
+    var aDA = aff(D,A);
+    var enmity = Math.max(0, -aDA);
+    if (enmity) drivers.push({k:"Enmity toward " + AB[A], v: enmity*0.7});
+    if (cf.stake) drivers.push({k:"Stakes of this conflict class", v: cf.stake});
+
+    var affection = Math.max(0, aDA);
+    if (affection) brakes.push({k:"Positive relations with " + AB[A], v: affection*1.0});
+    var dDA = dep(D,A);
+    if (dDA) brakes.push({k:"Entanglement with " + AB[A], v: dDA*1.2, why: DEP_WHY[D+"|"+A]});
+
+    ALL.forEach(function(X){
+      if (X===D || X===V || X===A) return;
+      if (aff(A,X) >= 2 && aff(X,A) >= 1){
+        var d = dep(D,X);
+        if (d>0) brakes.push({k: AB[A] + " is backed by " + AB[X] + ", which " + AB[D] + " depends on", v: d*0.6, why: DEP_WHY[D+"|"+X], third:true});
+      }
+    });
+
+    var iv = (INTERNAL[A] && INTERNAL[A][D]) || 0;
+    if (iv) brakes.push({k: AB[A] + " can destabilise " + AB[D] + " internally", v: iv*0.5, why: INTERNAL_WHY[A+"|"+D]});
+    var bd = hasBorder(D,A);
+    if (bd) brakes.push({k:"Shared land border with " + AB[A], v:0.8, why:"Retaliation reaches the defender's own soil"});
+
+    var W = drivers.reduce(function(s,x){return s+x.v;},0) - brakes.reduce(function(s,x){return s+x.v;},0);
+    var wTier = W<0?0 : W<1.5?1 : W<3?2 : W<4.5?3 : W<6?4 : 5;
+
+    var standing = STANDING.filter(function(s){return s.from===D && s.to===V && !s.outside;});
+    var floor = standing.reduce(function(m,s){return Math.max(m,s.tier);},0);
+
+    var reach = (REACH[D] && REACH[D][V]) || 0;
+    var cap = REACH_CAP[reach];
+
+    var forward = standing.some(function(s){return s.tier>=3;});
+    var peak = Math.max(wTier, floor);
+    if (forward) peak = peak+1;
+    peak = Math.min(peak, cap);
+
+    return {W:W, wTier:wTier, floor:floor, cap:cap, reach:reach, peak:peak, drivers:drivers, brakes:brakes, standing:standing, forward:forward};
+  }
+
+  function evaluateAlly(R,S,T,conflict,treaty){
+    var cf = CONFLICTS[conflict];
+    var drivers = [], brakes = [];
+
+    drivers.push({k:"Baseline alliance solidarity (no legal duty to back an ally's offence)", v: treaty*cf.mult*0.5});
+
+    var aRS = aff(R,S);
+    if (aRS>0) drivers.push({k:"Affinity with " + AB[S], v: aRS*0.6});
+    var dRS = dep(R,S);
+    if (dRS) drivers.push({k:"Dependence on " + AB[S], v: dRS*0.4});
+    var aRT = aff(R,T);
+    var enmityT = Math.max(0, -aRT);
+    if (enmityT) drivers.push({k:"Enmity toward " + AB[T], v: enmityT*0.5});
+
+    var affectionT = Math.max(0, aRT);
+    if (affectionT) brakes.push({k:"Positive relations with " + AB[T], v: affectionT*1.1});
+    var dRT = dep(R,T);
+    if (dRT) brakes.push({k:"Entanglement with " + AB[T], v: dRT*1.3, why: DEP_WHY[R+"|"+T]});
+
+    ALL.forEach(function(X){
+      if (X===R || X===S || X===T) return;
+      if (aff(T,X) >= 2 && aff(X,T) >= 1){
+        var d = dep(R,X);
+        if (d>0) brakes.push({k: AB[T] + " is backed by " + AB[X] + ", which " + AB[R] + " depends on", v: d*0.5, why: DEP_WHY[R+"|"+X], third:true});
+      }
+    });
+
+    if (cf.stake) brakes.push({k:"Reputational cost of visible association with the aggression", v: cf.stake*0.9});
+
+    var W = drivers.reduce(function(s,x){return s+x.v;},0) - brakes.reduce(function(s,x){return s+x.v;},0);
+    var pIdx = W<-1.5?0 : W<0?1 : W<1.5?2 : W<3?3 : 4;
+
+    var standing = STANDING.filter(function(s){return s.from===R && s.to===S && !s.outside;});
+    var sustains = standing.length>0;
+
+    return {W:W, pIdx:pIdx, drivers:drivers, brakes:brakes, standing:standing, sustains:sustains};
+  }
+
+  /* ---------------- render: standing layer ---------------- */
+  var standingEl = document.getElementById("standingFlows");
+  STANDING.forEach(function(s){
+    var row = document.createElement("div");
+    row.className = "flow-row";
+    row.innerHTML =
+      '<div class="flow-path' + (s.outside?' outside':'') + '">' + AB[s.from] + ' → ' + AB[s.to] +
+        '<span class="tier">T' + s.tier + ' ' + s.kind + '</span></div>' +
+      '<div class="flow-note">' + s.note + (s.outside ? '<span class="oob">[outside the pact]</span>' : '') + '</div>';
+    standingEl.appendChild(row);
+  });
+
+  /* ---------------- render: nuclear overlay ---------------- */
+  var nukeCardsEl = document.getElementById("nukeCards");
+  var nukeToggle = document.getElementById("nukeToggle");
+  NUCLEAR.forEach(function(n){
+    var hyp = n.status==="hypothesis";
+    var card = document.createElement("div");
+    card.className = "nuke-card " + (hyp?"dashed":"solid");
+    card.innerHTML =
+      '<div class="nuke-head">' +
+        '<span class="nuke-flow">' + AB[n.from] + (hyp?' ⇢ ':' → ') + AB[n.to] + '</span>' +
+        '<span class="nuke-type">' + n.type + '</span>' +
+        '<span class="nuke-status ' + n.status + '">' + n.label + '</span>' +
+      '</div>' +
+      (hyp ? '<div class="nuke-warn">MOTIVE AND CAPABILITY ONLY. NO EVIDENCE OF ACTIVITY. NOT DRAWN AS A LIVE FLOW.</div>' : '') +
+      '<p>' + n.basis + '</p>' +
+      '<p><span class="against">AGAINST: </span>' + n.counter + '</p>' +
+      '<div class="nuke-likelihood"><span>Assessed likelihood</span><b>' + n.assessed + '</b></div>';
+    nukeCardsEl.appendChild(card);
+  });
+  var nukeVisible = true;
+  nukeToggle.addEventListener("click", function(){
+    nukeVisible = !nukeVisible;
+    nukeCardsEl.style.display = nukeVisible ? "" : "none";
+    nukeToggle.textContent = nukeVisible ? "hide" : "show";
+  });
+
+  /* ---------------- controls ---------------- */
+  var selA = document.getElementById("selA");
+  var selV = document.getElementById("selV");
+  var selConflict = document.getElementById("selConflict");
+  var treatySlider = document.getElementById("treatySlider");
+  var treatyVal = document.getElementById("treatyVal");
+  var modeDefBtn = document.getElementById("modeDefensive");
+  var modeOffBtn = document.getElementById("modeOffensive");
+  var labA = document.getElementById("labA");
+  var labV = document.getElementById("labV");
+  var modeHint = document.getElementById("modeHint");
+  var trigRow = document.getElementById("trigRow");
+  var counterHead = document.getElementById("counterHead");
+  var nukeBridgeEl = document.getElementById("nukeBridge");
+
+  function fillSelect(el, opts, selected){
+    el.innerHTML = "";
+    opts.forEach(function(o){
+      var op = document.createElement("option");
+      op.value = o; op.textContent = o;
+      if (o===selected) op.selected = true;
+      el.appendChild(op);
+    });
+  }
+
+  var state = {mode:"defensive", A:"India", V:"Pakistan", conflict:"Extended conventional", treaty:2};
+
+  function refreshSelects(){
+    if (state.mode === "defensive"){
+      var vOpts = MJDA.filter(function(m){ return m!==state.A; });
+      if (vOpts.indexOf(state.V)===-1) state.V = vOpts[0];
+      fillSelect(selV, vOpts, state.V);
+
+      var aOpts = ALL.filter(function(c){ return c!==state.V; });
+      if (aOpts.indexOf(state.A)===-1) state.A = aOpts[0];
+      fillSelect(selA, aOpts, state.A);
+    } else {
+      if (MJDA.indexOf(state.A)===-1) state.A = MJDA[0];
+      fillSelect(selA, MJDA, state.A);
+
+      if (OUT.indexOf(state.V)===-1) state.V = OUT[0];
+      fillSelect(selV, OUT, state.V);
+    }
+    fillSelect(selConflict, Object.keys(CONFLICTS), state.conflict);
+  }
+
+  function setMode(mode, skipDefaults){
+    state.mode = mode;
+    modeDefBtn.classList.toggle("active", mode==="defensive");
+    modeOffBtn.classList.toggle("active", mode==="offensive");
+    if (mode==="defensive"){
+      labA.textContent = "Aggressor";
+      labV.textContent = "Victim (signatory)";
+      modeHint.textContent = "Article 5 case: a named outsider hits a signatory. The other two price their treaty obligation.";
+      trigRow.style.display = "";
+      counterHead.textContent = "What the aggressor does back";
+      if (!skipDefaults){ state.A = "India"; state.V = "Pakistan"; }
+    } else {
+      labA.textContent = "Acting signatory";
+      labV.textContent = "Target of the aggression";
+      modeHint.textContent = "No treaty duty applies here: the signatory is the one attacking. The other two price political solidarity, not a legal obligation.";
+      trigRow.style.display = "none";
+      counterHead.textContent = "What the target does back";
+      if (!skipDefaults){ state.A = "Pakistan"; state.V = "India"; }
+    }
+    refreshSelects();
+    render();
+  }
+  modeDefBtn.addEventListener("click", function(){ if (state.mode!=="defensive") setMode("defensive"); });
+  modeOffBtn.addEventListener("click", function(){ if (state.mode!=="offensive") setMode("offensive"); });
+
+  refreshSelects();
+
+  selA.addEventListener("change", function(){ state.A = selA.value; refreshSelects(); render(); });
+  selV.addEventListener("change", function(){ state.V = selV.value; refreshSelects(); render(); });
+  selConflict.addEventListener("change", function(){ state.conflict = selConflict.value; render(); });
+  treatySlider.addEventListener("input", function(){ state.treaty = parseFloat(treatySlider.value); treatyVal.textContent = (state.treaty>=0?"+":"") + state.treaty; render(); });
+
+  /* ---------------- render: results ---------------- */
+  var resultsEl = document.getElementById("engineResults");
+  var trigLabel = document.getElementById("trigLabel");
+  var conflictNote = document.getElementById("conflictNote");
+  var counterEl = document.getElementById("counterMoves");
+
+  function ladderHTML(peak, cap){
+    var html = '<div class="ladder2">';
+    TIERS.forEach(function(t,i){
+      var blocked = i>cap;
+      var on = i<=peak;
+      var bg = i===peak ? "var(--red)" : on ? "var(--amber)" : blocked ? "var(--bg-raised)" : "var(--border-soft)";
+      var col = i===peak ? "var(--cell-text)" : on ? "var(--cell-text)" : "var(--text-faint)";
+      var border = blocked ? "1px dashed var(--border)" : "none";
+      html += '<span style="background:' + bg + ';color:' + col + ';border:' + border + ';">' + i + '</span>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function postureLadderHTML(pIdx){
+    var html = '<div class="ladder2">';
+    POSTURE.forEach(function(p,i){
+      var active = i===pIdx;
+      var bg = active ? (pIdx>=3 ? "var(--red)" : pIdx<=1 ? "var(--teal)" : "var(--amber)") : "var(--border-soft)";
+      var col = active ? "var(--cell-text)" : "var(--text-faint)";
+      html += '<span style="background:' + bg + ';color:' + col + ';">' + p.t + '</span>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function nukeRelevant(){
+    if (state.conflict !== "Existential") return false;
+    if (state.mode === "defensive"){
+      var pair = [state.A, state.V];
+      var hasPak = pair.indexOf("Pakistan") !== -1;
+      var hasGulf = pair.indexOf("Saudi Arabia") !== -1 || pair.indexOf("Turkey") !== -1;
+      return hasPak && hasGulf;
+    }
+    return state.A === "Pakistan";
+  }
+
+  function indianConcern(){
+    var cf = CONFLICTS[state.conflict];
+    var big = (state.conflict === "Extended conventional" || state.conflict === "Existential");
+
+    if (state.mode === "offensive"){
+      if (state.A === "Pakistan"){
+        return {level:"high", note:"Pakistan is the aggressor here, so this is a direct India scenario regardless of who the target is. Everything below is Pakistan's own allies reacting to Pakistan's own choice."};
+      }
+      return {level:"low", note:"Neither Saudi Arabia nor Turkey initiating action against an outside target says much on its own about India's exposure."};
+    }
+
+    if (state.A === "India" || state.V === "India"){
+      return {level:"high", note:"India is a direct party to this scenario. Every figure in the model below is being priced against India's own action or exposure, not a third country's."};
+    }
+    if (state.V === "Pakistan"){
+      return {level: big ? "high" : "medium", note:"Pakistan is the party under attack. The direct channel to India is the standing flow: Saudi capital and Turkish materiel reaching Pakistan here are the same pipeline that sustains Pakistan in any future India-Pakistan crisis, so watch whether this accelerates or pauses it."};
+    }
+    if (state.A === "Pakistan"){
+      return {level:"medium", note:"Pakistan as aggressor against a Gulf partner draws on the same forces and bandwidth Pakistan would otherwise hold in reserve toward India. Watch whether the assets deployed here are drawn from India-facing formations."};
+    }
+    if (state.V === "Saudi Arabia"){
+      return {level: big ? "medium" : "low", note:"No Indian party is directly involved, but three real channels exist: energy prices, the safety of 2.7 million Indian workers in Saudi Arabia, and whether Pakistan's deployed squadron and air-defence assets there get drawn in deeper, which would draw down capacity normally postured toward India."};
+    }
+    if (state.V === "Turkey"){
+      return {level:"low", note:"Distant from India's core interests. The main channel is precedent: how Ankara behaves here shapes the confidence it carries into any future India-Pakistan crisis, not anything that touches India directly."};
+    }
+    return {level:"low", note:"No direct Indian exposure identified for this pairing."};
+  }
+
+  function renderIndianConcern(){
+    var el = document.getElementById("indianConcern");
+    var lvlEl = document.getElementById("icLevel");
+    var noteEl = document.getElementById("icNote");
+    if (!el) return;
+    var r = indianConcern();
+    el.className = "indian-concern " + r.level;
+    lvlEl.textContent = r.level.charAt(0).toUpperCase() + r.level.slice(1);
+    noteEl.textContent = r.note;
+  }
+
+  function renderDefensive(){
+    var cf = CONFLICTS[state.conflict];
+    trigLabel.textContent = cf.trigger.toUpperCase();
+    trigLabel.style.color = cf.trigger==="Clear" ? "var(--teal)" : cf.trigger==="Arguable" ? "var(--amber)" : "var(--red)";
+    conflictNote.textContent = cf.note;
+    treatyVal.textContent = (state.treaty>=0?"+":"") + state.treaty;
+    nukeBridgeEl.style.display = nukeRelevant() ? "block" : "none";
+
+    var partners = MJDA.filter(function(m){ return m!==state.V && m!==state.A; });
+    resultsEl.innerHTML = "";
+    if (!partners.length){
+      resultsEl.innerHTML = '<div class="engine-hint" style="padding:14px 0;">No third-party MJDA member left to evaluate. The aggressor is itself the only other signatory.</div>';
+    }
+
+    partners.forEach(function(D){
+      var r = evaluate(D, state.V, state.A, state.conflict, state.treaty);
+      var borderColor = r.peak>=4 ? "var(--red)" : r.peak>=2 ? "var(--amber)" : "var(--teal)";
+
+      var card = document.createElement("div");
+      card.className = "result-card";
+      card.style.borderLeftColor = borderColor;
+
+      var driversHTML = r.drivers.map(function(d){
+        return '<div class="db-row"><span>' + d.k + '</span><b style="color:var(--teal);">+' + d.v.toFixed(1) + '</b></div>';
+      }).join("");
+
+      var brakesHTML = r.brakes.length ? r.brakes.map(function(b){
+        var tag = b.third ? '<span class="db-tag">VIA ANOTHER COUNTRY</span>' : '';
+        var why = b.why ? '<div class="db-why">' + b.why + '</div>' : '';
+        return '<div class="db-row"><span>' + b.k + tag + '</span><b style="color:' + (b.third?'var(--blue)':'var(--red)') + ';">−' + b.v.toFixed(1) + '</b></div>' + why;
+      }).join("") : '<div class="db-row"><span>None</span><b style="color:var(--text-faint);">0.0</b></div>';
+
+      var flagsHTML = "";
+      if (r.wTier > r.cap) flagsHTML += '<div class="flag-row gap">WILLING AT T' + r.wTier + ', CAPABLE TO T' + r.cap + '. THE GAP IS GEOGRAPHY, NOT INTENT.</div>';
+      if (r.floor > r.wTier) flagsHTML += '<div class="flag-row floor">THE STANDING LAYER CARRIES THIS ABOVE WHAT THE CRISIS CALCULUS ALONE WOULD PRODUCE.</div>';
+
+      var reachWhy = REACH_WHY[D+"|"+state.V] ? '<div class="db-why">' + REACH_WHY[D+"|"+state.V] + '</div>' : '';
+
+      card.innerHTML =
+        '<div class="result-head"><span class="rname">' + D + '</span><span class="rpeak">Peak ' + TIERS[r.peak].t + ' · ' + TIERS[r.peak].n + '</span></div>' +
+        ladderHTML(r.peak, r.cap) +
+        '<div class="rung-desc">' + TIERS[r.peak].d + '. Dashed cells are beyond reach.</div>' +
+        '<div class="db-group"><div class="db-label" style="color:var(--teal);">Drivers</div>' + driversHTML + '</div>' +
+        '<div class="db-group"><div class="db-label" style="color:var(--red);">Brakes</div>' + brakesHTML + '</div>' +
+        '<div class="net-row"><span>Net willingness</span><span style="color:' + (r.W>=0?'var(--teal)':'var(--red)') + ';">' + r.W.toFixed(1) + ' → ' + TIERS[r.wTier].t + '</span></div>' +
+        '<div class="db-group"><div class="db-label" style="color:var(--amber);">Feasibility and floor</div>' +
+          '<div class="db-row"><span>Reach into ' + AB[state.V] + '’s theatre (' + r.reach + '/3)</span><b style="color:var(--amber);">ceiling ' + TIERS[r.cap].t + '</b></div>' + reachWhy +
+          (r.floor>0 ? '<div class="db-row"><span>Standing flow already running</span><b style="color:var(--teal);">floor ' + TIERS[r.floor].t + '</b></div>' : '') +
+          (r.forward ? '<div class="db-row"><span>Forward presence converts to engagement on contact</span><b style="color:var(--amber);">+1 tier</b></div>' : '') +
+        '</div>' +
+        flagsHTML;
+
+      resultsEl.appendChild(card);
+    });
+
+    var ctr = COUNTER[state.A];
+    counterEl.innerHTML = "";
+    if (ctr){
+      MJDA.filter(function(m){return m!==state.V;}).forEach(function(D){
+        if (!ctr[D]) return;
+        var block = document.createElement("div");
+        block.className = "counter-block";
+        block.innerHTML = '<div class="against">Against ' + AB[D] + '</div><ul>' + ctr[D].map(function(x){return '<li>'+x+'</li>';}).join("") + '</ul>';
+        counterEl.appendChild(block);
+      });
+      if (ctr.strategic){
+        var strat = document.createElement("div");
+        strat.className = "counter-strategic";
+        strat.textContent = ctr.strategic;
+        counterEl.appendChild(strat);
+      }
+    } else {
+      counterEl.innerHTML = '<div class="counter-strategic">No modelled counter-move set for this aggressor.</div>';
+    }
+  }
+
+  function renderOffensive(){
+    var cf = CONFLICTS[state.conflict];
+    conflictNote.textContent = cf.note;
+    treatyVal.textContent = (state.treaty>=0?"+":"") + state.treaty;
+    nukeBridgeEl.style.display = nukeRelevant() ? "block" : "none";
+
+    var responders = MJDA.filter(function(m){ return m!==state.A; });
+    resultsEl.innerHTML = "";
+
+    responders.forEach(function(R){
+      var r = evaluateAlly(R, state.A, state.V, state.conflict, state.treaty);
+      var p = POSTURE[r.pIdx];
+      var borderColor = r.pIdx>=3 ? "var(--red)" : r.pIdx===2 ? "var(--amber)" : "var(--teal)";
+
+      var card = document.createElement("div");
+      card.className = "result-card";
+      card.style.borderLeftColor = borderColor;
+
+      var driversHTML = r.drivers.map(function(d){
+        return '<div class="db-row"><span>' + d.k + '</span><b style="color:var(--teal);">+' + d.v.toFixed(1) + '</b></div>';
+      }).join("");
+      var brakesHTML = r.brakes.length ? r.brakes.map(function(b){
+        var tag = b.third ? '<span class="db-tag">VIA ANOTHER COUNTRY</span>' : '';
+        var why = b.why ? '<div class="db-why">' + b.why + '</div>' : '';
+        return '<div class="db-row"><span>' + b.k + tag + '</span><b style="color:' + (b.third?'var(--blue)':'var(--red)') + ';">−' + b.v.toFixed(1) + '</b></div>' + why;
+      }).join("") : '<div class="db-row"><span>None</span><b style="color:var(--text-faint);">0.0</b></div>';
+
+      var sustainHTML = r.sustains ? '<div class="flag-row floor">EXISTING FLOWS TO ' + AB[state.A] + ' DO NOT STOP MERELY BECAUSE IT IS THE AGGRESSOR. CONTRACTS ARE NOT ATTACK-CONTINGENT.</div>' : '';
+
+      card.innerHTML =
+        '<div class="result-head"><span class="rname">' + R + '</span><span class="rpeak">' + p.t + ' · ' + p.n + '</span></div>' +
+        postureLadderHTML(r.pIdx) +
+        '<div class="rung-desc">' + p.d + '.</div>' +
+        '<div class="db-group"><div class="db-label" style="color:var(--teal);">Drivers, toward backing ' + AB[state.A] + '</div>' + driversHTML + '</div>' +
+        '<div class="db-group"><div class="db-label" style="color:var(--red);">Brakes, toward restraint</div>' + brakesHTML + '</div>' +
+        '<div class="net-row"><span>Net posture</span><span style="color:' + (r.W>=0?'var(--red)':'var(--teal)') + ';">' + r.W.toFixed(1) + ' → ' + p.t + '</span></div>' +
+        sustainHTML;
+
+      resultsEl.appendChild(card);
+    });
+
+    var ctr = COUNTER[state.V];
+    counterEl.innerHTML = "";
+    if (ctr){
+      MJDA.filter(function(m){ return m!==state.A; }).forEach(function(R){
+        if (!ctr[R]) return;
+        var block = document.createElement("div");
+        block.className = "counter-block";
+        block.innerHTML = '<div class="against">Toward ' + AB[R] + '</div><ul>' + ctr[R].map(function(x){return '<li>'+x+'</li>';}).join("") + '</ul>';
+        counterEl.appendChild(block);
+      });
+      if (ctr.strategic){
+        var strat = document.createElement("div");
+        strat.className = "counter-strategic";
+        strat.textContent = ctr.strategic;
+        counterEl.appendChild(strat);
+      }
+    } else {
+      counterEl.innerHTML = '<div class="counter-strategic">No modelled counter-move set for this target.</div>';
+    }
+  }
+
+  function render(){
+    if (state.mode === "defensive") renderDefensive(); else renderOffensive();
+    renderIndianConcern();
+  }
+
+  render();
+
+  /* ============================ CASE FILES ============================ */
+  var CASES = [
+    {id:"A", tag:"Case A", title:"Israel strikes Turkish forces in Syria", mode:"defensive", A:"Israel", V:"Turkey", conflict:"Sub-conventional",
+      note:"Expeditionary assets hit, Anatolia untouched. The Hegemonic Check caps both Gulf partners low before this ever reaches materiel."},
+    {id:"B", tag:"Case B", title:"Israel strikes the Turkish homeland", mode:"defensive", A:"Israel", V:"Turkey", conflict:"Extended conventional",
+      note:"A direct hit on Anatolia. Expect NATO Article 4 to displace this pact as the operative instrument almost entirely."},
+    {id:"C", tag:"Case C", title:"India conducts limited punitive strikes", mode:"defensive", A:"India", V:"Pakistan", conflict:"Limited punitive",
+      note:"The Sindoor pattern: seventy two to ninety six hours, no territorial objective. Watch the gap between Riyadh and Ankara's postures."},
+    {id:"D", tag:"Case D", title:"Extended India-Pakistan war", mode:"defensive", A:"India", V:"Pakistan", conflict:"Extended conventional",
+      note:"Weeks, not days. This is where the standing layer, not the crisis calculus, decides how much Pakistan can sustain."},
+    {id:"E", tag:"Case E", title:"Iran strikes Saudi Arabia", mode:"defensive", A:"Iran", V:"Saudi Arabia", conflict:"Extended conventional",
+      note:"The live case since February 2026, and the only one where Pakistan has actually deployed rather than just paid or shipped."},
+    {id:"F", tag:"Case F", title:"Ansar Allah (Houthi) strikes on Saudi Arabia", mode:"defensive", A:"Ansar Allah", V:"Saudi Arabia", conflict:"Limited punitive",
+      note:"A sub-state aggressor with no patron dependence to leverage, Iran backs it but does not control the timing. Read this against Case E: same victim, a structurally different attacker."},
+    {id:"G", tag:"Case G", title:"Iran strikes Pakistani territory", mode:"defensive", A:"Iran", V:"Pakistan", conflict:"Sub-conventional",
+      note:"Baloch militant camps, the January 2024 precedent. India files this as doctrinal evidence, not as a reason for sympathy."},
+    {id:"H", tag:"Case H", title:"Pakistan attacks India", mode:"offensive", A:"Pakistan", V:"India", conflict:"Extended conventional",
+      note:"The reverse case: what do Pakistan's own allies do when Pakistan is the aggressor, not the victim. Saudi Arabia and Turkey diverge sharply here."}
+  ];
+  var caseGridEl = document.getElementById("caseGrid");
+  CASES.forEach(function(c){
+    var card = document.createElement("div");
+    card.className = "case-card";
+    card.innerHTML =
+      '<div class="num">' + c.tag + '</div>' +
+      '<h4>' + c.title + '</h4>' +
+      '<p>' + c.note + '</p>' +
+      '<button type="button" class="runbtn">Load into model &rarr;</button>';
+    card.querySelector(".runbtn").addEventListener("click", function(){
+      setMode(c.mode, true);
+      state.A = c.A; state.V = c.V; state.conflict = c.conflict;
+      refreshSelects();
+      render();
+      showTab("model");
+    });
+    caseGridEl.appendChild(card);
+  });
+
+})();
+</script>
